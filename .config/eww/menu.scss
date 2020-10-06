@@ -1,0 +1,142 @@
+/* Menu */
+
+.menu_win {
+  background-color: $bg-bar;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.menu_closer {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.menu_section {
+  padding: 20px;
+  margin: 16px 36px;
+  border: $fg-0 solid 2px;
+  border-radius: 10px;
+}
+
+
+/* Notification */
+.notify_box {
+  min-height: 200px;
+}
+.notify_box_title_box {
+  margin-bottom: 16px;
+}
+.notify_box_title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.notify_card {
+  background-color: $bg-2;
+  border-radius: 10px;
+}
+.notify_card_body {
+  padding: 8px 16px;
+}
+.notify_card_header {
+  background-color: $accent-2;
+  border-radius: 10px 10px 0 0;
+  font-size: 12px;
+}
+.notify_app_name {
+  margin-left: 16px;
+}
+.notify_close_btn {
+  padding: 4px;
+  margin-right: 16px;
+}
+
+/* Weather */
+.weather_icon {
+  font-size: 96px;
+  color: $accent-2;
+  margin-right: 16px;
+}
+.weather_text {
+  font-size: 30px;
+  color: $accent-1;
+  margin-right: 16px;
+}
+.weather_temp {
+  font-size: 24px;
+  color: $accent-0;
+}
+.weather_feel {
+  font-size: 16px;
+  color: $accent-0;
+  margin-right: 16px;
+}
+.weather_humid {
+  font-size: 16px;
+  color: $white;
+}
+
+
+/* Applications */
+.app_icon_btn {
+  padding: 10px;
+  margin: 0 8px;
+  min-width: 32px;
+  min-height: 32px;
+  border: $accent-2 solid 2px;
+  color: $accent-1;
+  border-radius: 10px;
+  font-size: 24px;
+}
+.app_icon_btn:hover {
+  background-color: $accent-2;
+}
+
+
+/* Brightness */
+.brightness_box {
+  margin: 20px 0 36px 0;
+}
+.brightness_text {
+  color: $yellow;
+}
+.brightness_scale trough {
+  margin: 16px 20px;
+  min-height: 20px;
+  min-width: 360px;
+}
+.brightness_scale trough highlight {
+  background-color: $yellow;
+}
+
+
+/* Music */
+.music_name {
+  color: $accent-0;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+.music_play_btn {
+  padding: 8px;
+  min-width: 36px;
+  min-height: 36px;
+  font-size: 18px;
+}
+
+
+/* Power */
+.power_box {
+  margin-top: 36px;
+}
+.power_btn {
+  padding: 10px;
+  margin: 0 16px;
+  min-width: 50px;
+  min-height: 50px;
+  border: $red solid 2px;
+  color: $red;
+  border-radius: 50px;
+  font-size: 32px;
+}
+.power_btn:hover {
+  background-color: $red;
+  color: $white;
+}

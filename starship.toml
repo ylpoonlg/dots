@@ -1,0 +1,55 @@
+# Starship Prompt Config
+
+format = """
+$username\
+$directory\
+$character
+"""
+
+right_format = """
+$cmd_duration\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status
+"""
+
+add_newline = false
+continuation_prompt = '[❯❯ ](white)'
+
+
+# Module configs
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style) '
+truncation_symbol = '…/'
+
+[username]
+format = '[$user]($style) '
+show_always = true
+
+[character]
+success_symbol = '[❯](bold white)'
+error_symbol = '[✗](bold red)'
+
+[cmd_duration]
+format = '[took $duration](bold italic blue) '
+min_time = 3_000
+show_milliseconds = true
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)](yellow) '
+symbol = ' '
+
+[git_state]
+disabled = false
+
+[git_status]
+format = '[$conflicted$untracked$modified$staged$ahead_behind](white)'
+ahead = '[$count](red)'
+behind = '[$count](cyan)'
+diverged = '[⇕](magenta)'
+up_to_date = '[✓](green)'
+conflicted = '[●](magenta)'
+untracked = '[●](red)'
+modified = '[●](yellow)'
+staged = '[●](green)'

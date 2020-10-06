@@ -1,0 +1,69 @@
+#!/bin/bash
+
+name="Bluetooth"
+icon=""
+
+list_devices() {
+    con_devices=''
+    dis_devices=''
+    while read -r line; do
+        name=$(echo $line | awk '{for (i=3; i<=NF; i++) printf $i" "; print ""}')
+        mac_addr=$(echo $line | awk '{print $2}')
+        
+        connected=$(bluetoothctl info $mac_addr | grep Connected | awk '{print $2}')
+        if [[ $connected == "yes" ]]; then
+            con_devices=$con_devices'(bluetooth_item :name "'$name'" :mac "'$mac_addr'" :status "connected")'
+        else
+            dis_devices=$dis_devices'(bluetooth_item :name "'$name'" :mac "'$mac_addr'" :status "disconnected")'
+        fi
+    done < <(bluetoothctl devices Paired)
+
+    devices=$con_devices$dis_devices
+
+    literal='(scroll :class "netwin_list" :vscroll true :vexpand true '
+    literal=$literal'(box :style "padding: 0 10px;" :orientation "v" :space-evenly false '
+    literal=$literal':valign "start" :vexpand true  '
+    literal=$literal''$devices'))'
+    echo $literal
+}
+
+scan_devices() {
+    current_literal=$(list_devices)
+    echo $current_literal
+    while sleep 2; do
+        new_literal=$(list_devices)
+        if [[ $current_literal != $new_literal ]]; then
+            echo $new_literal
+            current_literal=$new_literal
+        fi
+    done
+}
+
+connect() {
+    bluetoothctl connect $1
+}
+
+disconnect() {
+    bluetoothctl disconnect $1
+}
+
+case $1 in
+  "name")
+    echo $name
+    ;;
+  "icon")
+    echo $icon
+    ;;
+  "list")
+    scan_devices
+    ;;
+  "connect")
+    connect $2
+    ;;
+  "disconnect")
+    disconnect $2
+    ;;
+  "debug")
+    ;;
+esac
+

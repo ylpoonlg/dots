@@ -1,0 +1,78 @@
+*{
+  all: unset;
+  font-family: "JetBrains Mono", "Font Awesome 6 Free";
+}
+
+
+// Colors
+// Palette
+$black: #272822;
+$gray: #595959;
+$white: #F8F8F0;
+$red: #F92672;
+$orange: #FD971F;
+$yellow: #E6DB74;
+$green: #A6E22E;
+$cyan: #66D9EF;
+$blue: #217CDD;
+$purple: #AE81FF;
+
+// Theme
+$bg-bar: rgba(34, 37, 46, 0.9);
+$bg-0: #2C2F38;
+$bg-1: #22252E;
+$bg-2: $gray;
+$fg-0: $white;
+$fg-1: $gray;
+
+$accent-0: $cyan;
+$accent-1: $orange;
+$accent-2: $blue;
+
+.bg-0 {
+  color: $bg-0;
+}
+.bg-1 {
+  color: $bg-1;
+}
+.bg-bar {
+  color: $bg-bar;
+}
+.accent-0 {
+  color: $accent-0;
+}
+.accent-1 {
+  color: $accent-1;
+}
+.accent-2 {
+  color: $accent-2;
+}
+
+// Default Styles
+trough {
+  all: unset;
+  background-color: $bg-0;
+  min-height: 20px;
+  min-width: 100px;
+  border-radius: 20px;
+}
+
+trough highlight {
+  background-color: $accent-0;
+  border-radius: 20px;
+}
+
+scrollbar trough {
+  margin: 8px 4px;
+  min-width: 5px;
+  background-color: $gray;
+}
+scrollbar trough slider {
+  color: $accent-0;
+  background-color: $accent-0;
+}
+
+
+@import "./bar.scss";
+@import "./popups.scss";
+@import "./menu.scss";

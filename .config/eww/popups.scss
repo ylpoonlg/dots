@@ -1,0 +1,141 @@
+// General
+.popup_win {
+  background-color: $bg-bar;
+  padding: 16px;
+  border-radius: 10px;
+}
+.popup_action_btn {
+  padding: 4px;
+  font-size: 12px;
+}
+
+
+// Network
+.netwin_list {
+  min-height: 280px;
+  background-color: $bg-0;
+  border-radius: 8px;
+  padding: 0px 0;
+}
+.netwin_title {
+  font-size: 18px;
+  color: $accent-1;
+}
+
+.connitem_box {
+  padding: 4px 0px;
+  background-color: $bg-0;
+  border-radius: 8px;
+  min-height: 30px;
+}
+
+.connitem_name.connected {
+  color: $orange;
+}
+.connitem_name.disconnected {
+  color: $cyan;
+}
+
+.connitem_conn_btn {
+  margin-right: 8px;
+  min-width: 30px;
+  min-height: 30px;
+  border: $gray solid 1px;
+  border-radius: 30px;
+}
+.connitem_conn_btn:hover {
+  background-color: $gray;
+}
+.connitem_conn_btn.connected {
+  color: $gray;
+}
+.connitem_conn_btn.connected:hover {
+  color: $white;
+}
+.connitem_conn_btn.disconnected {
+  color: $white;
+}
+
+
+// Volume
+.volbar trough highlight {
+  background-color: $accent-1;
+}
+.volbar_val {
+  min-width: 16px;
+  color: $accent-1;
+}
+.volbar_val:hover {
+  color: $red;
+}
+.vol_device_txt {
+  color: $accent-0;
+}
+.vol_device_btn {
+  padding: 8px;
+  min-width: 16px;
+  min-height: 16px;
+  color: $white;
+  border: $gray solid 1px;
+  border-radius: 30px;
+}
+.vol_device_btn:hover {
+  background-color: $gray;
+}
+
+
+// Battery
+.battery_status_text {
+  color: $green;
+}
+.battery_percent_text {
+  color: $yellow;
+  font-size: 20px;
+}
+.batbar trough highlight {
+  background-color: $yellow;
+}
+.bat_chargemode {
+  color: $orange; 
+}
+.bat_chargemode_btn {
+  font-size: 20px;
+  padding: 8px;
+  color: $cyan; 
+}
+.bat_chargemode_btn:hover {
+  color: $blue; 
+}
+
+
+
+// Calendar
+.cal {
+  background-color: $bg-0;
+  font-size: 18px;
+
+  .cal-in {
+    padding: 10px;
+    color: $fg-0;
+
+    .cal {
+      padding: 5px 5px 5px 5px;
+      margin-left: 10px;
+    }
+  }
+}
+calendar:selected {
+  color: $accent-1;
+  font-size: 24px;
+  background-color: $bg-1;
+}
+calendar.header {
+  color: $accent-2;
+  font-weight: bold;
+}
+calendar.button, calendar.highlight {
+  color: $accent-0;
+}
+calendar:indeterminate {
+  color: $red;
+}

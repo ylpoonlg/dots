@@ -1,0 +1,128 @@
+#!/bin/bash
+
+close_all() {
+  eww close menu menu_closer
+  eww close popup_closer
+  eww close network
+  eww close bluetooth
+  eww close volume
+  eww close battery
+  eww close calendar
+
+  rm -f "$HOME/.cache/eww-menu.lock"
+  rm -f "$HOME/.cache/eww-network.lock"
+  rm -f "$HOME/.cache/eww-bluetooth.lock"
+  rm -f "$HOME/.cache/eww-volume.lock"
+  rm -f "$HOME/.cache/eww-battery.lock"
+  rm -f "$HOME/.cache/eww-calendar.lock"
+}
+
+
+menu() {
+  LOCK_FILE="$HOME/.cache/eww-menu.lock"
+
+  if [[ ! -f $LOCK_FILE ]]; then
+    close_all
+    eww open menu_closer
+    eww open menu 
+    touch $LOCK_FILE
+  else
+    eww close menu menu_closer
+    rm $LOCK_FILE
+  fi
+}
+
+
+network() {
+  LOCK_FILE="$HOME/.cache/eww-network.lock"
+
+  if [[ ! -f $LOCK_FILE && $1 != "close" ]]; then
+    close_all
+    eww open popup_closer
+    eww open network
+    touch $LOCK_FILE
+  else
+    eww close network popup_closer
+    rm $LOCK_FILE
+  fi
+}
+
+bluetooth() {
+  LOCK_FILE="$HOME/.cache/eww-bluetooth.lock"
+
+  if [[ ! -f $LOCK_FILE ]]; then
+    close_all
+    eww open popup_closer
+    eww open bluetooth
+    touch $LOCK_FILE
+  else
+    eww close bluetooth popup_closer
+    rm $LOCK_FILE
+  fi
+}
+
+volume() {
+  LOCK_FILE="$HOME/.cache/eww-volume.lock"
+
+  if [[ ! -f $LOCK_FILE ]]; then
+    close_all
+    eww open popup_closer
+    eww open volume
+    touch $LOCK_FILE
+  else
+    eww close volume popup_closer
+    rm $LOCK_FILE
+  fi
+}
+
+battery() {
+  LOCK_FILE="$HOME/.cache/eww-battery.lock"
+
+  if [[ ! -f $LOCK_FILE ]]; then
+    close_all
+    eww open popup_closer
+    eww open battery
+    touch $LOCK_FILE
+  else
+    eww close battery popup_closer
+    rm $LOCK_FILE
+  fi
+}
+
+calendar() {
+  LOCK_FILE="$HOME/.cache/eww-calendar.lock"
+
+  if [[ ! -f $LOCK_FILE ]]; then
+    close_all
+    eww open popup_closer
+    eww open calendar
+    touch $LOCK_FILE
+  else
+    eww close calendar popup_closer
+    rm $LOCK_FILE
+  fi
+}
+
+case $1 in
+  "calendar")
+    calendar
+    ;;
+  "network")
+    network
+    ;;
+  "bluetooth")
+    bluetooth
+    ;;
+  "volume")
+    volume
+    ;;
+  "battery")
+    battery
+    ;;
+  "menu")
+    menu
+    ;;
+  "close-all")
+    close_all
+    ;;
+esac

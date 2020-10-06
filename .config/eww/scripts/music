@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Check by running playerctl -l
+player_name="clementine"
+
+case $1 in
+  "get-status-icon")
+    music_stat=$(playerctl -p $player_name status)
+    if [[ $music_stat == "Playing" ]]; then
+      echo ""
+    elif [[ $music_stat == "Stopped" || $music_stat == "Paused" ]]; then
+      echo ""
+    else
+      (clementine &) #launch clementine
+      echo "!"
+    fi
+    ;;
+  "toggle-status")
+    playerctl -p $player_name play-pause
+    ;;
+  "get-track-name")
+    echo $(playerctl -p $player_name metadata title)
+    ;;
+  "get-track-artist")
+    echo $(playerctl -p $player_name metadata artist)
+    ;;
+  "prev-track")
+    playerctl -p $player_name previous
+    ;;
+  "next-track")
+    playerctl -p $player_name next
+    ;;
+esac

@@ -1,0 +1,24 @@
+/**
+ * Theme by ylpoonlg
+ */
+
+* {
+    red:                         rgba ( 220, 50, 47, 100 % );
+    pink:                        rgba ( 249, 38, 114, 100 % );
+    orange:                      rgba ( 253, 151, 31, 100 % );
+    yellow:                      rgba ( 230, 219, 116, 100 % );
+    green:                       rgba ( 166, 226, 42, 100 % );
+    blue:                        rgba ( 102, 217, 239, 100 % );
+    purple:                      rgba ( 174, 129, 255, 100 % );
+    white:                       rgba ( 248, 248, 242, 100 % );
+
+    background:                  rgba ( 44, 47, 56, 90 % );
+    background-alt:              rgba ( 34, 37, 46, 90 % );
+    foreground:                  @white;
+    foreground-alt:              @yellow;
+    border:                      @blue;
+    selected:                    @orange;
+    active:                      @green;
+    urgent:                      @pink;
+}
+

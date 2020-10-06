@@ -1,0 +1,109 @@
+#!/bin/bash
+
+sinks=$(pactl list sinks | grep 'Name' | awk '{print $2}')
+sources=$(pactl list sources | grep 'Name' | awk '{print $2}')
+
+default_sink=$(pactl get-default-sink)
+default_source=$(pactl get-default-source)
+
+# next_index cur tot
+#   next id out of total number of devices
+next_index () {
+  cur=$1
+  tot=$2
+  if [ $cur == $tot ]; then
+    echo 1
+  else
+    echo $(($1+1))
+  fi
+}
+
+get_icon() {
+  volume=$(pactl get-sink-volume $default_sink | awk '{gsub("%", ""); print $5}')
+  muted=$(pactl get-sink-mute $default_sink | awk '{print $2}')
+
+  if [ $muted == "yes" ]; then
+    icon="ﱝ"
+  elif [ $volume -gt 75 ]; then
+    icon="墳"
+  elif [ $volume -gt 25 ]; then
+    icon="奔"
+  elif [ $volume -gt 0 ]; then
+    icon="奄"
+  else
+    icon="ﱝ"
+  fi
+
+  echo $icon
+}
+
+case $1 in
+  "icon")
+    get_icon
+    ;;
+  "get-sink-volume")
+    echo $(pactl get-sink-volume $default_sink | awk '{gsub("%", ""); print $5}')
+    ;;
+  "get-source-volume")
+    echo $(pactl get-source-volume $default_source | awk '{gsub("%", ""); print $5}')
+    ;;
+
+  "set-sink-volume")
+    pactl set-sink-volume $default_sink $2%
+    ;;
+  "set-source-volume")
+    pactl set-source-volume $default_source $2%
+    ;;
+
+  "get-sink-text")
+    name=$(pactl get-default-sink)
+    echo $(pactl list sinks | grep -A1 "$name" | grep "Desc" | awk '{for (i=2; i<=NF; i++) printf $i" "; print ""}')
+    ;;
+  "get-source-text")
+    name=$(pactl get-default-source)
+    echo $(pactl list sources | grep -A1 "$name" | grep "Desc" | awk '{for (i=2; i<=NF; i++) printf $i" "; print ""}')
+    ;;
+
+  "next-sink")
+    name=$(pactl get-default-sink)
+    index=$(pactl list sinks | grep "Name" | grep -n "$name" | cut -d ":" -f 1)
+    total=$(pactl list sinks | grep "Name" | wc -l)
+    index=$(next_index $index $total)
+    name=$(pactl list sinks | grep "Name" | sed -n "$index""p" | awk '{print $2}')
+    pactl set-default-sink $name
+    echo $name
+    ;;
+  "next-source")
+    name=$(pactl get-default-source)
+    index=$(pactl list sources | grep "Name" | grep -n "$name" | cut -d ":" -f 1)
+    total=$(pactl list sources | grep "Name" | wc -l)
+    index=$(next_index $index $total)
+    name=$(pactl list sources | grep "Name" | sed -n "$index""p" | awk '{print $2}')
+    pactl set-default-source $name
+    echo $name
+    ;;
+
+  "get-sink-mute")
+    muted=$(pactl get-sink-mute $default_sink | awk '{print $2}')
+    if [ $muted == "no" ]; then
+      echo "false"
+    else
+      echo "true"
+    fi
+    ;;
+  "get-source-mute")
+    muted=$(pactl get-source-mute $default_source | awk '{print $2}')
+    if [ $muted == "no" ]; then
+      echo "false"
+    else
+      echo "true"
+    fi
+    ;;
+
+  "toggle-mute-sink")
+    pactl set-sink-mute $default_sink toggle
+    ;;
+  "toggle-mute-source")
+    pactl set-source-mute $default_source toggle
+    ;;
+esac

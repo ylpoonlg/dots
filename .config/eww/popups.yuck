@@ -1,0 +1,218 @@
+;; Variables
+(defpoll sink_volume    :interval "1s" "scripts/volume get-sink-volume")
+(defpoll source_volume  :interval "1s" "scripts/volume get-source-volume")
+(defpoll default_sink   :interval "1s" "scripts/volume get-sink-text")
+(defpoll default_source :interval "1s" "scripts/volume get-source-text")
+(defpoll sink_muted     :interval "1s" :initial "true" "scripts/volume get-sink-mute")
+(defpoll source_muted   :interval "1s" "scripts/volume get-source-mute")
+(defpoll charge_mode    :interval "5s" "scripts/battery charge-mode current")
+
+(deflisten net_list "scripts/network list")
+(deflisten bluetooth_list "scripts/bluetooth list")
+
+;; Popup Windows
+
+
+;; Network
+(defwidget network_win []
+  (box :class "popup_win" :orientation "v" :space-evenly false :spacing 20
+    (literal :content net_list)
+    (box :orientation "h" :space-evenly false :halign "end" :spacing 16
+      (button :class "popup_action_btn" :tooltip "Open Network Settings"
+              :onclick "scripts/pop network && (exec systemsettings kcm_networkmanagement &)"
+        "")
+      )
+    )
+  )
+
+(defwidget connection_item [name type status]
+  (box :class "connitem_box" :orientation "h" :space-evenly false :spacing 16
+    (label :class "connitem_name ${status}" :text {type=="ethernet" ? "" : ""})
+    (label :class "connitem_name ${status}" :hexpand true :halign "start" :limit-width 20 :text name)
+    (button :class "connitem_conn_btn connected" :halign "end" :visible {status=="connected" && type=="wifi"}
+      :onclick "scripts/network disconnect ${name}"
+      :tooltip "Disconnect" "")
+    (button :class "connitem_conn_btn disconnected" :halign "end" :visible {status=="disconnected"}
+      :onclick "scripts/network connect ${name}"
+      :tooltip "Connect" "")
+    )
+  )
+
+(defwindow network
+  :geometry (geometry
+      :x "-240px" 
+      :y "48px" 
+      :anchor "top right"
+      :width "360px" 
+      :height "100px")
+  (network_win))
+
+
+;; Bluetooth
+(defwidget bluetooth_win []
+  (box :class "popup_win" :orientation "v" :space-evenly false :spacing 20
+    (literal :content bluetooth_list)
+    (box :orientation "h" :space-evenly false :halign "end" :spacing 16
+      (button :class "popup_action_btn" :tooltip "Open Bluetooth Settings"
+              :onclick "scripts/pop bluetooth && (exec systemsettings kcm_bluetooth &)"
+        "")
+      )
+    )
+  )
+
+(defwidget bluetooth_item [name mac status]
+  (box :class "connitem_box" :orientation "h" :space-evenly false :spacing 16
+    (label :class "connitem_name ${status}" :text {""})
+    (label :class "connitem_name ${status}" :hexpand true :halign "start" :limit-width 20 :text name)
+    (button :class "connitem_conn_btn connected" :halign "end" :visible {status=="connected"}
+      :onclick "scripts/bluetooth disconnect ${mac}"
+      :tooltip "Disconnect" "")
+    (button :class "connitem_conn_btn disconnected" :halign "end" :visible {status=="disconnected"}
+      :onclick "scripts/bluetooth connect ${mac}"
+      :tooltip "Connect" "")
+    )
+  )
+
+(defwindow bluetooth
+  :geometry (geometry
+      :x "-240px"
+      :y "48px"
+      :anchor "top right"
+      :width "360px"
+      :height "100px")
+  (bluetooth_win))
+
+
+;; Volume
+(defwidget volume_win []
+  (box :class "popup_win" :orientation "v" :space-evenly false :spacing 20
+    ;; Output
+    (box :class "vol_device_box" :orientation "h" :hexpand true :space-evenly false
+      (label :class "vol_device_txt" :hexpand true :halign "start" :limit-width 24
+        :text "${default_sink}")
+      (button :class "vol_device_btn" :hexpand false :halign "end"
+        :onclick "scripts/volume next-sink"
+        :tooltip "Change Output Device" "")
+      )
+    (box :orientation "h" :space-evenly false :spacing 16
+      (button :class "volbar_val" :onclick "scripts/volume toggle-mute-sink"
+        :tooltip "Mute/Unmute" "${sink_muted ? "" : sink_volume}")
+      (scale :class "volbar"
+             :value "${round(sink_volume, 0)}"
+             :mark "vol"
+             :onchange "scripts/volume set-sink-volume {}" 
+             :orientation "h"
+             :max 100
+             :min 0
+             :hexpand true
+         )
+      )
+
+    ;; Input
+    (box :class "vol_device_box" :orientation "h" :hexpand true :space-evenly false
+      (label :class "vol_device_txt" :hexpand true :halign "start" :limit-width 24
+        :text "${default_source}")
+      (button :class "vol_device_btn" :hexpand false :halign "end"
+        :onclick "scripts/volume next-source"
+        :tooltip "Change Input Device" "")
+      )
+    (box :orientation "h" :space-evenly false :spacing 16
+      (button :class "volbar_val" :onclick "scripts/volume toggle-mute-source"
+        :tooltip "Mute/Unmute" "${source_muted ? "" : source_volume}")
+      (scale :class "volbar"
+             :value "${round(source_volume, 0)}"
+             :mark "vol"
+             :onchange "scripts/volume set-source-volume {}" 
+             :orientation "h"
+             :max 100
+             :min 0
+             :hexpand true
+         )
+      )
+
+    (box :orientation "h" :space-evenly false :halign "end" :spacing 16
+      (button :class "popup_action_btn" :tooltip "Open PulseAudio Settings"
+              :onclick "scripts/pop volume && (exec pavucontrol-qt &)"
+        "")
+      )
+    ))
+
+(defwindow volume
+  :geometry (geometry
+      :x "-240px" 
+      :y "48px" 
+      :anchor "top right"
+      :width "320px" 
+      :height "100px")
+  (volume_win))
+
+
+;; Battery
+(defwidget battery_win []
+  (box :class "popup_win" :orientation "v" :space-evenly false :spacing 20
+    (box :orientation "h" :space-evenly false :halign "center" :spacing 16
+      (label :class "accent-0" :style "font-size: 20px;" :text "Battery")
+      (label :text "-")
+      (label :class "battery_status_text" :text "${bat_status}")
+      )
+    (label :class "battery_percent_text" :text "${bat_percent}%")
+    (scale :class "batbar" :active false
+      :value bat_percent :min 0 :max 100)
+
+    (box :class "bat_chargemode_box" :orientation "h" :space-evenly false :hexpand true
+      (label :class "bat_chargemode" :halign "start" :text "Mode: ")
+      (label :class "bat_chargemode" :halign "start" :hexpand true :text charge_mode)
+      (button :class "popup_action_btn bat_chargemode_btn" :timeout "20s"
+        :tooltip "Adaptive Mode"
+        :halign "end"
+        :onclick "scripts/battery charge-mode adaptive"
+        "")
+      (button :class "popup_action_btn bat_chargemode_btn" :timeout "20s"
+        :tooltip "Docked Mode"
+        :halign "end"
+        :onclick "scripts/battery charge-mode docked"
+        "")
+      )
+    )
+  )
+
+(defwindow battery
+  :geometry (geometry
+      :x "-240px" 
+      :y "48px" 
+      :anchor "top right"
+      :width "270px" 
+      :height "100px")
+  (battery_win))
+
+
+;; Calendar
+(defwidget cal []
+  (box :class "cal" :orientation "v"
+    (box :class "cal-in"
+      (calendar :class "cal" 
+        :show-day-names true
+        :show-heading true
+        :show-details true
+        :show-week-numbers true
+        ))))
+
+(defwindow calendar
+  :geometry (geometry :x "-10px" 
+                      :y "48px" 
+                      :anchor "top right"
+                      :width "270px" 
+                      :height "60px")
+  (cal))
+
+
+
+(defwindow popup_closer
+    :geometry (geometry
+        :x "0px"
+        :y "48px"
+        :anchor "top left"
+        :width  "100%"
+        :height "100%"
+      )
+  (button :class "popup_closer" :onclick "scripts/pop close-all" ""))

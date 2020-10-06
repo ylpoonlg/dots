@@ -1,0 +1,6 @@
+add-config.sh
+update-config.sh
+
+.config/nvim/plugin/packer_compiled.lua
+
+**/__pycache__/

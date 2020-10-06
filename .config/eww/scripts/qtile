@@ -1,0 +1,28 @@
+#!/bin/bash
+cd `dirname $0`
+
+case "$1" in
+  switch)
+    qtile cmd-obj -o group $2 -f toscreen
+    ;;
+  restart)
+    qtile cmd-obj -o cmd -f restart
+    ;;
+  shutdown)
+    qtile cmd-obj -o cmd -f shutdown
+    ;;
+  layout)
+    if [ ! -z $2 ]; then
+      echo $(python layout.py --monitor $2)
+    else
+      echo $(python layout.py)
+    fi
+    ;;
+  workspaces)
+    if [ ! -z $2 ]; then
+      echo $(python workspaces.py --monitor $2)
+    else
+      echo $(python workspaces.py)
+    fi
+    ;;
+esac

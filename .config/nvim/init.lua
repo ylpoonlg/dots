@@ -1,0 +1,6 @@
+require('settings')
+require('style')
+require('plugins')
+require('lsp')
+require('plugin_setup')
+require('keys')

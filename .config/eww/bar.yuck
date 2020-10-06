@@ -1,0 +1,234 @@
+;; Edited by ylpoonlg
+;; Inspired by https://github.com/Asocia/dotfiles
+
+;; Polls
+(defpoll wmlayout0     :interval "1s" "scripts/qtile layout 0")
+(defpoll wmlayout1     :interval "1s" "scripts/qtile layout 1")
+(defpoll workspaces0   :interval "0.25s" "scripts/qtile workspaces 0")
+(defpoll workspaces1   :interval "0.25s" "scripts/qtile workspaces 1")
+(deflisten trayer "scripts/onopen")
+(defpoll net_icon     :interval "5s" "scripts/network icon")
+(defpoll net_name     :interval "5s" "scripts/network name")
+(defpoll vol_icon     :interval "1s" "scripts/volume icon")
+(defpoll bat_icon     :interval "5s" "scripts/battery icon")
+(defpoll bat_percent  :interval "5s" "scripts/battery percent")
+(defpoll bat_status   :interval "5s" "scripts/battery status")
+(defpoll mem_used     :interval "2s"    "free | grep 'Mem' | awk '{print $3}'")
+(defpoll mem_total    :interval "1000s" "free | grep 'Mem' | awk '{print $2}'")
+(defpoll clock_hour   :interval "1s" "date +\%H")
+(defpoll clock_minute :interval "1s" "date +\%M")
+(defpoll clock_second :interval "1s" "date +\%S")
+(defpoll clock_date   :interval "1s" "date '+%Y-%m-%d'")
+(defpoll clock_hkt    :interval "1s" "TZ='Asia/Hong_Kong' date '+%H:%M'")
+
+;; Variables
+(defvar cpu_rev false)
+(defvar mem_rev false)
+
+
+;; Widgets
+(defwidget menu []
+  (eventbox :cursor "pointer"
+    (button :class "menu_btn"
+            :onclick "scripts/pop menu"
+      (image :path "images/arch.png"
+             :image-width  "20"
+             :image-height "20")
+      )
+    )
+  )
+
+(defwidget wmlayout0 []
+  (button :class "wm_btn wmlayout_btn"
+    wmlayout0)
+  )
+
+(defwidget wmlayout1 []
+  (button :class "wm_btn wmlayout_btn"
+    wmlayout1)
+  )
+
+(defwidget wmrestart []
+  (button :class "wm_btn wmrestart_btn"
+      :onclick "scripts/qtile restart"
+    "")
+  )
+
+
+(defwidget workspaces0 []
+  (literal :content workspaces0))
+
+(defwidget workspaces1 []
+  (literal :content workspaces1))
+
+(defwidget wifi [] 
+  (button :class "wifi_icon control_icons" :tooltip "${net_name}"
+          :onclick "scripts/pop network" net_icon))
+
+(defwidget bluetooth [] 
+    (button :class "bluetooth_icon control_icons"
+            :onclick "scripts/pop bluetooth" ""))
+
+(defwidget volume []
+  (button :class "volume_icon control_icons"
+          :onclick "scripts/pop volume" vol_icon))
+
+(defwidget battery []
+  (button :class "battery_icon control_icons"
+          :tooltip "${bat_status} - ${bat_percent}%"
+          :onclick "scripts/pop battery" bat_icon))
+
+
+;; Metrics
+(defwidget metric [widget widget_rev value percent tooltip_pre tooltip_post]
+  (eventbox 
+    :onhover "eww update ${widget}_rev=true"
+    :onhoverlost "eww update ${widget}_rev=false"
+    (box :class "${widget}_module" :vexpand "false" :hexpand "false" 
+      (circular-progress 
+        :value {percent==""?0.0:percent}
+        :class "metrics_bar ${widget}bar"
+        :thickness 4
+        (button
+          :style "margin: 10px;"
+          :limit-width 9
+          :tooltip "${tooltip_pre}${value}${tooltip_post}"
+          :show_truncated false
+          :wrap false
+          (revealer 
+            :transition "slideleft"
+            :reveal widget_rev
+            :duration "350ms"
+            (label :class "metrics_text" :text percent)
+            )
+          )
+        )
+      )
+    )
+  )
+
+(defwidget metrics []
+  (box :orientation "h"
+       :space-evenly false
+    (metric :widget "cpu"  :widget_rev cpu_rev
+        :value   "${round(EWW_CPU.avg, 0)}"
+        :percent "${round(EWW_CPU.avg, 0)}"
+        :tooltip_pre "CPU: " :tooltip_post "%")
+    (metric :widget "mem"  :widget_rev mem_rev
+        :value   "${round(mem_used/1024, 0)}"
+        :percent "${round(mem_used/(mem_total==""?mem_used:mem_total) * 100, 0)}"
+        :tooltip_pre "RAM: " :tooltip_post "MB")
+   ))
+
+
+(defwidget clock []
+  (eventbox :onclick "scripts/pop calendar"
+    (box :class "module" :space-evenly "false" :orientation "h" :spacing "1" 
+      :tooltip "HKT ${clock_hkt}"
+       (label :text clock_date :class "clock_date_class")
+       (label :text {clock_hour+":"+clock_minute+":"+clock_second} :class "clock_time_class")
+      )))
+
+
+
+
+;; Bar Layouts
+(defwidget sep []
+  (box :class "module-2" :vexpand "false" :hexpand "false"
+    (label :class "separ" :text "|")))
+
+
+;; Primary Bar
+(defwidget leftbar []
+  (box :orientation "h" 
+       :space-evenly false  
+       :valign "center"
+       :halign "start"
+    (menu)
+    ;;(wmrestart)
+    (wmlayout0)
+  ))
+(defwidget centerbar []
+  (box :orientation "h" 
+       :space-evenly false  
+       :halign "center"
+    (workspaces0)
+  ))
+(defwidget rightbar []
+  (box :orientation "h" 
+       :space-evenly false  
+       :valign "center"
+       :halign "end"
+    (label :text trayer)  ;; Start trayer
+    (wifi)
+    (bluetooth)
+    (volume)
+    (battery)
+    (metrics)
+    (sep)
+    (clock)
+    ))
+(defwidget topbar []
+  (centerbox :orientation "h"
+             :class "bar_class"
+    (leftbar)
+    (centerbar)
+    (rightbar)
+  ))
+(defwindow bar
+  :monitor 0
+  :geometry (geometry
+  :x "0%"
+  :y "4px"
+  :width "1908px"
+  :height "40px"
+  :anchor "top center")
+  :stacking "fg"
+  :reserve (struts :distance "48px" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  (topbar))
+
+
+;; Secondary Bar
+(defwidget leftbar2 []
+  (box :orientation "h" 
+       :space-evenly false  
+       :valign "center"
+       :halign "start"
+    (wmlayout1)
+  ))
+(defwidget centerbar2 []
+  (box :orientation "h" 
+       :space-evenly false  
+       :halign "center"
+    (workspaces1)
+  ))
+(defwidget rightbar2 []
+  (box :orientation "h" 
+       :space-evenly false  
+       :valign "center"
+       :halign "end"
+    (sep)
+    (clock)
+    ))
+(defwidget topbar2 []
+  (centerbox :orientation "h"
+             :class "bar_class"
+    (leftbar2)
+    (centerbar2)
+    (rightbar2)
+  ))
+(defwindow bar2
+  :monitor 1
+  :geometry (geometry
+  :x "0%"
+  :y "4px"
+  :width "1908px"
+  :height "40px"
+  :anchor "top center")
+  :stacking "fg"
+  :reserve (struts :distance "48px" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  (topbar2))

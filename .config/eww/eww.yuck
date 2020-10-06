@@ -1,0 +1,3 @@
+(include "/home/long/.config/eww/bar.yuck")
+(include "/home/long/.config/eww/popups.yuck")
+(include "/home/long/.config/eww/menu.yuck")

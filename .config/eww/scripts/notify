@@ -1,0 +1,75 @@
+#!/bin/bash
+
+DUNST_CACHE_DIR="$HOME/.cache/dunst"
+DUNST_LOG="$DUNST_CACHE_DIR/notifications.txt"
+
+mkdir "$DUNST_CACHE_DIR" 2>/dev/null
+touch "$DUNST_LOG" 2>/dev/null
+
+create_cache() {
+  local urgency
+  case "$DUNST_URGENCY" in
+    "LOW"|"NORMAL"|"CRITICAL") urgency="$DUNST_URGENCY";;
+    *) urgency="OTHER";;
+  esac
+
+  local summary
+  local body
+  [ "$DUNST_SUMMARY" = "" ] && summary="Summary unavailable." || summary="$DUNST_SUMMARY"
+  [ "$DUNST_BODY" = "" ] && body="Body unavailable." || body="$(echo "$DUNST_BODY" | recode html)"
+
+  local glyph
+  case "$urgency" in
+    "LOW") glyph="";;
+    "NORMAL") glyph="";;
+    "CRITICAL") glyph="";;
+    *) glyph="";;
+  esac
+
+  card=''
+  card=$card'(notification-card :class "notify_card notify_card_'$urgency'" '
+  card=$card':dunstid "'$DUNST_ID'" :application "'$DUNST_APP_NAME'" '
+  card=$card':body "'$body'" :summary "'$summary'")'
+
+  echo $card >> $DUNST_LOG
+}
+
+make_literal() {
+  children=$(cat $DUNST_LOG)
+  local literal
+  if [[ -z $children ]]; then
+    literal='(box :height 320 :orientation "v" :space-evenly false
+        (label :vexpand true :valign "center" :wrap true
+          :class "notify_empty_label" :text "No Notifications"))'
+  else
+    literal='(scroll :height 320 :vscroll true (box :orientation "v" :class "notify_scroll_box" :spacing 10 :space-evenly false '$children'))'
+  fi
+  echo $literal
+}
+
+subscribe() {
+  local current_literal
+  while sleep 0.2; do
+    new_literal=$(make_literal)
+    if [[ $current_literal != $new_literal ]]; then
+      echo $new_literal
+      current_literal=$new_literal
+    fi
+  done
+}
+
+remove() {
+  sed -i '/dunstid "'$1'"/d' "$DUNST_LOG"
+}
+
+clear() {
+  rm "$DUNST_LOG"
+  touch "$DUNST_LOG" 2>/dev/null
+}
+
+case "$1" in
+  "subscribe") subscribe;;
+  "remove") remove $2;;
+  "clear") clear;;
+  *) create_cache;; # called by dunst
+esac

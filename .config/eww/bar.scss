@@ -1,0 +1,123 @@
+// Bar
+.bar_class {
+  background-color: $bg-bar;
+  border-radius: 8px;
+}
+
+.separ {
+  color: $fg-1;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 0px 8px;
+}
+
+tooltip.background {
+  background-color: $bg-1;
+  font-size: 12px;
+  border-radius: 0px;
+  color: $fg-0;
+}
+tooltip label {
+  margin: 6px;
+}
+
+
+// Menu
+.menu_btn {
+  min-width: 32px;
+  min-height: 32px;
+  margin-left: 16px;
+  border-radius: 30px;
+  background-color: $bg-1;
+}
+.menu_btn:hover {
+  background-color: $black;
+}
+
+.wm_btn {
+  margin-left: 16px;
+}
+.wmrestart_btn {
+  color: $accent-1;
+}
+.wmlayout_btn {
+  color: $gray;
+  margin-left: 30px;
+}
+
+// Workspaces
+.workspaces {
+  background-color: $bg-1;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+.workspaces button {
+  margin: 0 2px;
+  padding: 4px 2px;
+  color: $gray;
+}
+.workspaces button.ws_occupied {
+  color: $accent-0;
+}
+.workspaces button.ws_focused {
+  color: $white;
+}
+.workspaces button.ws_thisscreen {
+  color: $accent-1;
+}
+
+
+// Widgets
+.control_icons {
+  min-width: 30px;
+  min-height: 30px;
+  margin: 0px 4px;
+  font-size: 14px;
+  color: $accent-0;
+  border-radius: 30px;
+  border: transparent solid 1px;
+}
+.control_icons:hover {
+  color: $white;
+  border: $accent-2 solid 1px;
+}
+.control_icons * {
+  font-family: "Nerd Font";
+  font-size: 16px;
+}
+
+.wifi_icon, .volume_icon {
+  color: $accent-1;
+}
+
+// Metrics
+.metrics_bar {
+  background-color: $bg-1;
+  border-radius:    10px;
+  margin: 0 8px;
+}
+.metrics_text {
+  font-size: 15px;
+  min-width: 18px;
+  min-height: 18px;
+}
+.cpubar {
+  color: $accent-1;
+}
+.membar {
+  color: $accent-0;
+}
+
+
+// Clock
+.clock_date_class {
+  font-size: 14px;
+  margin-right: 10px;
+  color: $accent-1;
+}
+.clock_time_class {
+  font-size: 20px;
+  margin-right: 20px;
+  color: $accent-0;
+}

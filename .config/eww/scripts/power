@@ -1,0 +1,26 @@
+#!/bin/bash
+cd `dirname $0`
+
+./pop menu
+case $1 in
+  "Suspend")
+    systemctl suspend
+    slock
+  ;;
+  "Hibernate")
+    systemctl hibernate
+    slock
+  ;;
+  "Lock")
+    slock
+  ;;
+  "Shutdown")
+    shutdown now
+  ;;
+  "Restart")
+    reboot
+  ;;
+  "Logout")
+    ./qtile shutdown
+  ;;
+esac

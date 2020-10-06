@@ -1,0 +1,130 @@
+#!/bin/bash
+
+# Network Scroll Box
+box_start='(scroll :class "netwin_list" :vscroll true :vexpand true '
+box_start=$box_start'(box :style "padding: 0 10px;" :orientation "v" :space-evenly false '
+box_start=$box_start':valign "start" :vexpand true '
+box_end='))'
+
+# Currently Connected Networks
+eth_conn=$(nmcli d | grep ethernet | grep " connected " | awk '{for (i=4; i<=NF; i++) printf $i" "; print ""}')
+wifi_conn=$(nmcli d | grep wifi | grep " connected " | awk '{for (i=4; i<=NF; i++) printf $i" "; print ""}')
+
+if [[ ! -z $eth_conn ]]; then
+  icon=""
+  name=$eth_conn
+elif [[ ! -z $wifi_conn ]]; then
+  icon="直"
+  name=$wifi_conn
+else
+  icon="睊"
+  name="No Connections"
+fi
+
+
+list_eth() {
+  connections=''
+  while read -r line; do
+    name=$(echo $line | awk '{for (i=4; i<=NF; i++) printf $i" "; print ""}')
+    stat=$(echo $line | awk '{print $3}')
+    if [[ ! $name =~ "--" ]]; then
+      connections=$connections'(connection_item :name "'$name'" :type "ethernet" :status "'$stat'")'
+    fi
+  done < <(nmcli d | grep ethernet)
+
+  echo $connections
+}
+
+list_wifi() {
+  active_ssids=()
+  inactive_ssids=()
+  while read -r line; do
+    ssid=$(echo $line | awk '{for (i=1; i<NF-1; i++) printf $i" "; print ""}')
+    active=$(echo $line | awk '{print $(NF-1)}')
+    if [[ ! $ssid =~ "--" && \
+      -z $(echo ${active_ssids[@]} | grep -o $ssid) && \
+      -z $(echo ${inactive_ssids[@]} | grep -o $ssid) ]]; then
+      if [[ $active == "yes" ]]; then
+        active_ssids+=("$ssid")
+      else
+        inactive_ssids+=("$ssid")
+      fi
+    fi
+  done < <(nmcli -f NAME,ACTIVE,TYPE connection show | grep wifi)
+
+  connections=''
+
+  for ssid in "${active_ssids[@]}"; do
+    connections=$connections'(connection_item :name "'$ssid'" :type "wifi" :status "connected")'
+  done
+
+  for ssid in "${inactive_ssids[@]}"; do
+    connections=$connections'(connection_item :name "'$ssid'" :type "wifi" :status "disconnected") '
+  done
+
+  echo $connections
+}
+
+list_networks() {
+  # Get Connections
+  connections=''
+  connections=$connections$(list_eth)
+  connections=$connections$(list_wifi)
+
+  literal=$box_start
+  literal=$literal$connections$box_end
+  echo $literal
+}
+
+scan_networks() {
+
+  literal=$box_start
+  if [[ ! -z $wifi_conn ]]; then
+    literal=$literal'(connection_item :name "'$wifi_conn'" :type "wifi" :status "connected")'
+  fi
+
+  literal=$literal'(box :height 200 :vexpand true :valign "center" '
+  literal=$literal'(label :class "connitem_name disconnected" :text "Loading..."))'
+  literal=$literal$box_end
+
+  echo $literal
+
+  current_literal=$literal
+  while sleep 2; do
+    new_literal=$(list_networks)
+    if [[ $current_literal != $new_literal ]]; then
+      echo $new_literal
+      current_literal=$new_literal
+    fi
+  done
+}
+
+connect() {
+  nmcli connection up $1
+}
+
+disconnect() {
+  nmcli connection down $1
+}
+
+case $1 in
+  "name")
+    echo $name
+    ;;
+  "icon")
+    echo $icon
+    ;;
+  "list")
+    scan_networks
+    ;;
+  "connect")
+    connect $2
+    ;;
+  "disconnect")
+    disconnect $2
+    ;;
+  "debug")
+    list_eth
+    ;;
+esac
+
