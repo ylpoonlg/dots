@@ -1,0 +1,8 @@
+configuration {
+    combi-modi: "drun,run";
+    font: "hack 12";
+    show-icons: false; 
+}
+@theme "Monokai-LG"
+
+/* vim:ft=css
