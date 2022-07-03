@@ -10,7 +10,8 @@ nitrogen --restore &
 # init
 /usr/lib/polkit-kde-authentication-agent-1 & # polkit
 gnome-keyring-daemon -r -d # keyring
-picom & # compositor
+#picom & # compositor
+picom --experimental-backends & # compositor
 fcitx & # google pinyin input
 #plank & # application dock
 
@@ -23,7 +24,8 @@ optimus-manager-qt &
 #nm-applet --indicator &
 
 # connections
-sudo rfkill unblock bluetooth &
+rfkill block bluetooth
+rfkill unblock bluetooth
 
 # power management
 /usr/lib/org_kde_powerdevil &

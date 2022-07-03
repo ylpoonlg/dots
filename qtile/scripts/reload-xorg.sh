@@ -11,7 +11,7 @@ fi
 xrandr --output $intDP --auto
 xrandr --output $extDP --auto
 
-sleep 5
+sleep 2
 
 if xrandr | grep -q "$extDP connected"; then
     # External Display Connected
