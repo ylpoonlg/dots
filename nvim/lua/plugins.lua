@@ -37,6 +37,7 @@ return packer.startup(function(use)
     use "wbthomason/packer.nvim" -- Have packer manage itself
 
     use 'tanvirtin/monokai.nvim'
+    use 'lukas-reineke/virt-column.nvim'
     --use 'itchyny/lightline.vim'
     use {
       'nvim-lualine/lualine.nvim',
@@ -65,6 +66,7 @@ return packer.startup(function(use)
     use 'numToStr/Comment.nvim'
 
     use 'dart-lang/dart-vim-plugin'
+    use 'vim-python/python-syntax'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

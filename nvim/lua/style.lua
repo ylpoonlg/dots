@@ -15,6 +15,12 @@ require('monokai').setup({
     },
 })
 
+vim.cmd([[
+hi link VirtColumn Comment
+let g:python_highlight_all = 1
+]])
+
+
 -- Status Bar
 local lg_lualine_theme = require'lualine.themes.OceanicNext'
 local b_bg = '#565e76'

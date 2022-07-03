@@ -11,6 +11,8 @@ vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.linebreak = true
 vim.opt.wrap = false
+vim.cmd("set colorcolumn=80")
+vim.opt.foldmethod = "syntax"
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4

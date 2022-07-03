@@ -1,3 +1,4 @@
+require("virt-column").setup()
 require('nvim-web-devicons').setup()  -- must be set after <colorscheme> command
 require('neoscroll').setup()
 require('Comment').setup()

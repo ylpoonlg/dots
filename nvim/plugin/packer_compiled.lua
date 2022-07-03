@@ -159,6 +159,11 @@ _G.packer_plugins = {
     path = "/home/long/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["python-syntax"] = {
+    loaded = true,
+    path = "/home/long/.local/share/nvim/site/pack/packer/start/python-syntax",
+    url = "https://github.com/vim-python/python-syntax"
+  },
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/home/long/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
@@ -183,6 +188,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/long/.local/share/nvim/site/pack/packer/start/vimtex",
     url = "https://github.com/lervag/vimtex"
+  },
+  ["virt-column.nvim"] = {
+    loaded = true,
+    path = "/home/long/.local/share/nvim/site/pack/packer/start/virt-column.nvim",
+    url = "https://github.com/lukas-reineke/virt-column.nvim"
   }
 }
 

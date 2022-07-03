@@ -22,6 +22,8 @@ map("", "<A-T>", ":tabprevious<CR>", opts)
 
 map("n", "<C-a>", ":%y+<CR>", opts) -- Copy whole file
 map("v", "<C-c>", "\"+y", opts) -- Copy selected
+map("v", "H", "^", opts)
+map("v", "L", "$", opts)
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 
@@ -38,3 +40,11 @@ map("n", "<C-f>", ":NvimTreeToggle<CR>", opts)
 map("n", "<C-s>", ":SymbolsOutline<CR>", opts)
 map("n", "ff", ":Telescope find_files<CR>", opts)
 map("n", "fg", ":Telescope live_grep<CR>", opts)
+
+vim.cmd([[
+function! SynGroup()                                                            
+    let l:s = synID(line('.'), col('.'), 1)                                       
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+map gm :call SynGroup()<CR>
+]])
