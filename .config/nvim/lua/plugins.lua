@@ -46,7 +46,12 @@ return packer.startup(function(use)
     }
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'lervag/vimtex'
-    use 'kyazdani42/nvim-tree.lua'
+    use {
+        'kyazdani42/nvim-tree.lua',
+        config = function ()
+            require('plugins-configs.nvim_tree')
+        end,
+    }
     use 'kyazdani42/nvim-web-devicons'
     use 'simrat39/symbols-outline.nvim'
     use 'karb94/neoscroll.nvim'
@@ -58,7 +63,7 @@ return packer.startup(function(use)
         'glepnir/dashboard-nvim',
         event = 'VimEnter',
         config = function ()
-            require('plugins.dashboard')
+            require('plugins-configs.dashboard')
         end,
         requires = {'nvim-tree/nvim-web-devicons'},
     }
@@ -77,6 +82,7 @@ return packer.startup(function(use)
     use 'hrsh7th/vim-vsnip-integ'
     use 'onsails/lspkind.nvim'
     use 'numToStr/Comment.nvim'
+    use 'ur4ltz/surround.nvim'
 
     -- Language
     use 'dart-lang/dart-vim-plugin'

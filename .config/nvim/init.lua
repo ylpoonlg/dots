@@ -1,6 +1,6 @@
 require('settings')
 require('style')
-require('plugins')
 require('lsp')
+require('plugins')
 require('plugin_setup')
 require('keys')

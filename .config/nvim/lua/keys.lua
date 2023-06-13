@@ -16,7 +16,6 @@ map("n", "rvi", ":vert resize +2<CR>", opts)
 map("n", "rvm", ":vert resize -2<CR>", opts)
 map("n", "n", "nzzzv", opts)
 map("n", "N", "Nzzzv", opts)
---map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
 map("", "<C-n>", ":tabnew<CR>", opts)
 map("", "<C-w>", ":tabclose<CR>", opts)
@@ -29,6 +28,10 @@ map("v", "H", "^", opts)
 map("v", "L", "$", opts)
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
+map("i", "<C-BS>", "<Esc>cvb", opts)
+map("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+map("", "x", "\"_x", opts)
 
 vim.cmd([[
 vnoremap J :m '>+1<CR>gv=gv
