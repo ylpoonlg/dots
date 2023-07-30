@@ -13,8 +13,8 @@
 (defpoll bat_icon     :interval "5s" "scripts/battery icon")
 (defpoll bat_percent  :interval "5s" "scripts/battery percent")
 (defpoll bat_status   :interval "5s" "scripts/battery status")
-(defpoll mem_used     :interval "2s"    "free | grep 'Mem' | awk '{print $3}'")
-(defpoll mem_total    :interval "1000s" "free | grep 'Mem' | awk '{print $2}'")
+(defpoll mem_used     :interval "2s" :initial "1" "free | grep 'Mem' | awk '{print $3}'")
+(defpoll mem_total    :interval "1000m" :initial "1" "free | grep 'Mem' | awk '{print $2}'")
 (defpoll clock_hour   :interval "1s" "date +\%H")
 (defpoll clock_minute :interval "1s" "date +\%M")
 (defpoll clock_second :interval "1s" "date +\%S")
@@ -30,7 +30,7 @@
 (defwidget menu []
   (eventbox :cursor "pointer"
     (button :class "menu_btn"
-            :onclick "scripts/pop menu"
+            :onclick "scripts/pop menu" :timeout "500ms"
       (image :path "images/arch.png"
              :image-width  "20"
              :image-height "20")
@@ -91,21 +91,19 @@
         :thickness 4
         (button
           :style "margin: 10px;"
-          :limit-width 9
           :tooltip "${tooltip_pre}${value}${tooltip_post}"
-          :show_truncated false
-          :wrap false
           (revealer 
             :transition "slideleft"
             :reveal widget_rev
             :duration "350ms"
-            (label :class "metrics_text" :text percent)
-            )
+            (label :class "metrics_text" :text percent
+                   :limit-width 9 :wrap false)
           )
         )
       )
     )
   )
+)
 
 (defwidget metrics []
   (box :orientation "h"
@@ -196,6 +194,7 @@
        :space-evenly false  
        :valign "center"
        :halign "start"
+    (menu)
     (wmlayout1)
   ))
 (defwidget centerbar2 []

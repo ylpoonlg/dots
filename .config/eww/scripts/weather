@@ -59,6 +59,10 @@ check_if_empty_icon() {
 		else
 			echo ""
 		fi
+    elif [ "$1" = "Drizzle" ]; then
+      echo ""
+    else
+      echo ""
 	fi
 }
 case $1 in

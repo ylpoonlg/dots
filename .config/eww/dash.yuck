@@ -1,0 +1,322 @@
+;; Variables ==================================================================
+
+;; User Profile
+(defvar USR_IMG "/home/long/.face")
+(defpoll USR_NAME  :interval "1000m" `getent passwd "$USER" | cut -d: -f5 | cut -d, -f1`)
+(defpoll USR_UNAME :interval "1000m" "whoami")
+
+;; Uptime
+(defpoll UPHOUR :interval "5s" `uptime -p | awk '{print $2}'`)
+(defpoll UPMIN :interval "5s" `uptime -p | awk '{print $4}'`)
+
+;; Disk
+(defpoll DISK_FREE :interval "5s" `df -h / | awk '{print $4}' | tail -n 1 | sed 's/G/GB/'`)
+
+;; Controls
+(defpoll brightness :interval "1s" :initial "50" "brightnessctl g")
+
+;; Time Date
+(defpoll TIME_HOUR :interval "5s" `date +"%H"`)
+(defpoll TIME_MIN :interval "5s" `date +"%M"`)
+(defpoll DATE_DOW :interval "5s" `date +"%A"`)
+(defpoll DATE :interval "5s" `date +"%d/%m/%Y"`)
+
+;; Weather
+(defpoll whumid :interval "900s" "scripts/weather humidity")
+(defpoll wfeel :interval "900s"  "scripts/weather feels_like")
+(defpoll wtemp :interval "900s"  "scripts/weather current_temp")
+(defpoll wdesc :interval "900s"  "scripts/weather weather_desc")
+(defpoll wicon :interval "900s"  "scripts/weather weather_desc_icon")
+
+;; Music
+(defpoll music_status_icon :interval "1s" "scripts/music get-status-icon")
+(defpoll music_track_title :interval "1s" "scripts/music get-track-name")
+(defpoll music_track_artist :interval "1s" "scripts/music get-track-artist")
+
+;; Notifications
+(deflisten notifications-cards "scripts/notify subscribe")
+(defpoll notifications-clear :interval "30m" "scripts/notify clear")
+
+;; Power
+(defvar power_reveal false)
+
+
+
+;; Widgets ====================================================================
+
+;; User Profile
+(defwidget user_profile []
+  (box :class "menu_win"
+       :orientation "v" :space-evenly false
+       :height 200
+    (box :style "background-image: url('${USR_IMG}');" :class "profile-img" :halign "center")
+    (label :class "profile-name" :text "${USR_NAME}")
+    (label :class "profile-uname" :text " ${USR_UNAME}")
+  )
+)
+
+;; Uptime
+(defwidget uptime []
+  (box :class "menu_win"
+       :orientation "h" :space-evenly true
+       :height 80
+    (label :class "uptime-time" :text "Uptime")
+    (label :class "uptime-time" :text "${UPHOUR}H ${UPMIN}M")
+  )
+)
+
+;; Disk Space
+(defwidget disk []
+  (box :class "menu_win"
+       :orientation "h" :space-evenly true
+       :height 80
+    (label :class "disk-space" :text "Disk")
+    (label :class "disk-space" :text "${DISK_FREE}")
+  )
+)
+
+;; Controls
+(defwidget controls []
+  (box :class "menu_win"
+       :orientation "v" :space-evenly true :vexpand true
+    (box :class "brightness_box" :orientation "h"
+         :space-evenly false :halign "center"
+      (label :class "brightness_text" :text "󰃞")
+      (scale :class "brightness_scale"
+             :min 20
+             :max 400
+             :value "${brightness}"
+             :onchange "brightnessctl s {}"
+      )
+      (label :class "brightness_text" :text "${round(brightness/400 * 100, 0)}%")
+    )
+  )
+)
+
+;; Time Date
+(defwidget timedate []
+  (box :class "menu_win"
+       :orientation "v" :space-evenly true
+       :height 200
+    (label :class "timedate-time" :text "${TIME_HOUR}:${TIME_MIN}")
+    (label :class "timedate-dow" :text "${DATE_DOW}")
+    (label :class "timedate-date" :text "${DATE}")
+  )
+)
+
+;; Music
+(defwidget music []
+  (box :class "menu_win"
+       :orientation "v" :space-evenly false
+       :height 100
+    (label :class "music_name" :limit-width 30
+           :text "${music_track_title}")
+    (label :class "music_artist" :limit-width 30
+           :text "${music_track_artist}")
+    (box :class "music_control" :orientation "h"
+         :space-evenly false :halign "center" :spacing 16
+      (button :class "music_play_btn" :tooltip "Prev Song"
+              :onclick "scripts/music prev-track" "")
+      (button :class "music_play_btn" :tooltip "Play/Pause"
+              :onclick "scripts/music toggle-status" music_status_icon)
+      (button :class "music_play_btn" :tooltip "Next Song"
+              :onclick "scripts/music next-track" "")
+    )
+  )
+)
+
+;; Notification
+(defwidget notifications []
+  (box :class "menu_win"
+       :orientation "v" :space-evenly false :valign "start"
+    (box :class "notify_box_title_box" :orientation "h"
+         :space-evenly true :valign "center"
+      (label :class "notify_box_title accent-1"
+        :halign "start" :text "Notifications")
+      (button :halign "end"
+          :onclick "scripts/notify clear"
+        "")
+    )
+    (literal :content notifications-cards)
+  )
+)
+
+;; Weather
+(defwidget weather []
+  (box :class "menu_win" :orientation "v" :space-evenly false
+       :height 200
+    (label :class "weather_icon" :text "${wicon}")
+    (label :class "weather_text" :text "${wdesc}")
+    (box :orientation "h" :space-evenly false :halign "center"
+      (label :class "weather_temp" :text "${wtemp}")
+      (label :class "weather_feel" :text "/${wfeel}")
+    )
+    (label :class "weather_humid" :text "Humidity ${whumid}%")
+  )
+)
+
+;; Applications
+(defwidget app_entry [name]
+  (button :class "app-btn" :halign "center" :valign "center"
+          :onclick "scripts/openapp ${name}" :timeout "1000ms"
+    (box :class "app-icon" :halign "center" :valign "center"
+         :style "background-image: url('images/${name}.svg');"
+    )
+  )
+)
+
+(defwidget applications []
+  (box :class "menu_win" :orientation "v" :space-evenly true :vexpand true
+    (box :orientation "h" :space-evenly true :valign "center"
+      (app_entry :name "kitty")
+      (app_entry :name "firefox")
+      (app_entry :name "pcmanfm")
+      (app_entry :name "clementine")
+    ) ;; row
+    (box :orientation "h" :space-evenly true :valign "center"
+      (app_entry :name "settings")
+      (app_entry :name "stacer")
+      (app_entry :name "signal")
+      (app_entry :name "superslicer")
+    ) ;; row
+  ) ;; box
+)
+
+;; Power Buttons
+(defwidget power_menu []
+  (box :class "menu_win" :orientation "v" :space-evenly false :height 100
+    (eventbox :cursor "pointer"
+              :onhover     "eww update power_reveal=true"
+              :onhoverlost "eww update power_reveal=false"
+      (box :class "power_box" :orientation "h" :space-evenly false
+           :halign "center"
+          ;; Left
+          (revealer :transition "slideleft" :duration "250ms"
+              :reveal power_reveal
+            (box :orientation "h" :space-evenly true
+              (button :class "power_btn" :tooltip "Restart"
+                  :onclick "scripts/power Restart" "")
+              (button :class "power_btn" :tooltip "Shutdown"
+                  :onclick "scripts/power Shutdown" "")
+            )
+          )
+
+          ;; Center
+          (button :class "power_btn" :tooltip "Suspend"
+              :onclick "scripts/power Suspend" "󰤂")
+
+          ;; Right
+          (revealer :transition "slideright" :duration "250ms"
+                    :reveal power_reveal
+            (box :orientation "h" :space-evenly true
+              (button :class "power_btn" :tooltip "Hibernate"
+                  :onclick "scripts/power Hibernate" "")
+              (button :class "power_btn" :tooltip "Logout"
+                  :onclick "scripts/power Logout" "")
+            )
+          )
+      )
+    )
+  )
+)
+
+
+
+;; Menu -----------------------------------------------------------------------
+(defwidget menu_win []
+  (box :orientation "h"
+       :space-evenly false
+
+    ;; Left Column
+    (box :orientation "v" :space-evenly false :width 300
+      (timedate)
+      (music)
+      (notifications)
+    )
+
+    ;; Center Column
+    (box :orientation "v" :space-evenly false :width 400
+      (user_profile)
+      (uptime)
+      (disk)
+      (controls)
+    )
+
+    ;; Right Column
+    (box :orientation "v" :space-evenly false :width 400
+      (weather)
+      (applications)
+      (power_menu)
+    )
+
+  ) ;; box
+) ;; defwidget
+
+(defwindow menu
+  :geometry (geometry
+      :x "0px" 
+      :y "0px" 
+      :anchor "center"
+      :width "1000px" 
+      :height "600px")
+  (menu_win)
+)
+
+
+
+;; Notification
+(defwidget notification-card [?class dunstid application summary body]
+  (box :space-evenly false :orientation "v" :class "${class}"
+    ;; Header
+    (box :space-evenly "true" :orientation "h" :height 8
+         :class "notify_card_header"
+      (label :class "notify_app_name" :text "${application}" :halign "start")
+      (button :onclick "scripts/notify remove ${dunstid}"
+              :class "notify_close_btn" :halign "end"
+              :tooltip
+        "Remove" "")
+    )
+
+    ;; Body
+    (box :class "notify_card_body"
+      :space-evenly "false" :orientation "h"
+      (box :orientation "vertical"
+        :class class
+        :space-evenly false
+        :hexpand true
+        :class "notification-card-box"
+      
+        (box :space-evenly false
+          (label :limit-width 25
+                 :wrap true
+                 :text summary
+                 :class "notify_summary"
+                 :halign "start"
+                 :hexpand true)
+        )
+        (label :limit-width 30
+               :wrap true
+               :text body
+               :halign "start"
+               :class "notify_body")
+      )
+    )
+  )
+)
+
+
+;; Closer =====================================================================
+(defwidget menu_closer []
+  (button :class "menu_closer_btn"
+          :onclick "scripts/pop close-all" "")
+)
+
+(defwindow menu_closer
+    :geometry (geometry
+        :x "0px"
+        :y "0px"
+        :anchor "top left"
+        :width  "100%"
+        :height "100%")
+  (menu_closer)
+)

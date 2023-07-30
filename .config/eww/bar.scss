@@ -47,16 +47,20 @@ tooltip label {
 
 // Workspaces
 .workspaces {
-  background-color: $bg-1;
-  font-size: 16px;
-  padding: 4px 8px;
+  font-size: 24px;
+  padding: 2px 8px;
   border-radius: 20px;
 }
 .workspaces button {
   margin: 0 2px;
-  padding: 4px 2px;
+  padding: 2px 4px;
+  border-radius: 50px;
   color: $gray;
 }
+.workspaces button:hover {
+  background-color: rgba(0,0,0,0.3);
+}
+
 .workspaces button.ws_occupied {
   color: $accent-0;
 }

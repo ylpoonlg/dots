@@ -64,7 +64,7 @@ keys = [
     
     # Qtile
     Key([mod, "control", "shift"], "r",
-        lazy.spawn(os.path.join(config_path, 'scripts/reload-xorg.sh')),
+        lazy.spawn('/home/long/.local/bin/setup-screens.sh'),
         lazy.restart(),
         lazy.spawn(os.path.join(config_path, 'scripts/launchbar.sh')),
         desc="Restart Qtile and Reload Xorg config"),

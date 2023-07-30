@@ -29,20 +29,24 @@ create_cache() {
   card=''
   card=$card'(notification-card :class "notify_card notify_card_'$urgency'" '
   card=$card':dunstid "'$DUNST_ID'" :application "'$DUNST_APP_NAME'" '
-  card=$card':body "'$body'" :summary "'$summary'")'
+  card=$card':body "'$body'" :summary "'$summary'")
+  '
 
   echo $card >> $DUNST_LOG
 }
 
 make_literal() {
-  children=$(cat $DUNST_LOG)
   local literal
+  children=$(cat $DUNST_LOG)
+  height=200  # Height of the scroll box
   if [[ -z $children ]]; then
-    literal='(box :height 320 :orientation "v" :space-evenly false
+    literal='(box :orientation "v" :space-evenly true :height '$height'
         (label :vexpand true :valign "center" :wrap true
           :class "notify_empty_label" :text "No Notifications"))'
   else
-    literal='(scroll :height 320 :vscroll true (box :orientation "v" :class "notify_scroll_box" :spacing 10 :space-evenly false '$children'))'
+    literal='(scroll :height '$height' :vscroll true
+        (box :orientation "v" :vexpand true :class "notify_scroll_box"
+             :spacing 10 :space-evenly false '$children'))'
   fi
   echo $literal
 }

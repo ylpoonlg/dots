@@ -1,0 +1,31 @@
+#!/bin/bash
+
+sleep 0.1                   # Prevent toggling the closer twice after clicking
+scripts/pop menu
+
+case $1 in
+  "clementine")
+    clementine &
+    ;;
+  "firefox")
+    firefox &
+    ;;
+  "kitty")
+    kitty -d ~ &
+    ;;
+  "pcmanfm")
+    pcmanfm-qt &
+    ;;
+  "settings")
+    systemsettings &
+    ;;
+  "signal")
+    signal-desktop &
+    ;;
+  "stacer")
+    stacer &
+    ;;
+  "superslicer")
+    superslicer &
+    ;;
+esac

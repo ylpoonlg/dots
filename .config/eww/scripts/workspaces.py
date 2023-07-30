@@ -21,7 +21,7 @@ for name, group in c.call('groups').items():
 
     groups[name] = {"occupied": occupied, "focused": focused, "thisscreen": thisscreen}
 
-output = '(box	:class "workspaces"	:orientation "h" :spacing 5 '
+output = '(box	:class "workspaces"	:orientation "h" '
 output += ':space-evenly "false" :halign "center" :valign "center" :vexpand "true"'
 for name, prop in groups.items():
     command = f"scripts/qtile switch {name}"
@@ -34,8 +34,8 @@ for name, prop in groups.items():
     if prop['thisscreen']:
         buttonclass += " ws_thisscreen"
 
-
-    output += f'(button :onclick "{command}" :class "{buttonclass}" "{name}")'
+    output += f'(button :onclick "{command}" :class "{buttonclass}" "")'
+    # output += f'(button :onclick "{command}" :class "{buttonclass}" "{name}")'
 
 output += ')'
 print(output)

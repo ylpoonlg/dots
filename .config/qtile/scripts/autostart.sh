@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # keyboard
-setxkbmap -option caps:escape
+# setxkbmap -option caps:escape
 
 # trackpad
 xinput set-prop "DLL0945:00 04F3:311C Touchpad" "libinput Tapping Enabled" 1
@@ -21,8 +21,11 @@ dunst & # notification
 optimus-manager-qt &
 
 # connections
-rfkill block bluetooth  # reset bluetooth
-rfkill unblock bluetooth
+# rfkill block bluetooth  # reset bluetooth
+# rfkill unblock bluetooth
 
 # power management
 /usr/lib/org_kde_powerdevil &
+
+# Lock Screen
+light-locker --lock-on-suspend --lock-on-lid &

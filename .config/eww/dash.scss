@@ -1,0 +1,185 @@
+/* ----------- Menu ----------- */
+.menu_win {
+  background-color: $bg-bar;
+  border-radius: 20px;
+  padding: 16px;
+  margin: 4px;
+}
+
+.menu_closer {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ----------- User Profile ----------- */
+.profile-img {
+  margin: 16px;
+  background-size: 128px;
+  min-width: 128px;
+  min-height: 128px;
+  border: $white solid 1px;
+  border-radius: 100%;
+}
+
+.profile-name {
+  color: $white;
+  font-size: 24px;
+}
+
+.profile-uname {
+  color: $orange;
+  font-size: 20px;
+}
+
+/* ----------- Uptime ----------- */
+.uptime-time {
+  color: $cyan;
+  font-size: 24px;
+}
+
+/* ----------- Disk ----------- */
+.disk-space {
+  color: $orange;
+  font-size: 24px;
+}
+
+/* ----------- Brightness ----------- */
+.brightness_text {
+  color: $yellow;
+  font-size: 20px;
+}
+
+.brightness_scale trough {
+  margin: 16px 20px;
+  min-height: 20px;
+  min-width: 360px;
+}
+
+.brightness_scale trough highlight {
+  background-color: $yellow;
+}
+
+/* ----------- Time Date ----------- */
+.timedate-time {
+  color: $cyan;
+  font-size: 40px;
+}
+
+.timedate-dow {
+  color: $orange;
+  font-size: 30px;
+}
+
+.timedate-date {
+  color: $white;
+  font-size: 24px;
+}
+
+/* ----------- Music ----------- */
+.music_name {
+  color: $cyan;
+  font-size: 20px;
+}
+
+.music_artist {
+  color: $white;
+  font-size: 16px;
+}
+
+.music_play_btn {
+  padding: 8px;
+  min-width: 36px;
+  min-height: 36px;
+  font-size: 18px;
+  border-radius: 100%;
+}
+.music_play_btn:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* ----------- Notification ----------- */
+.notify_box_title_box {
+  margin-bottom: 16px;
+}
+.notify_box_title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.notify_card {
+  background-color: $bg-2;
+  border-radius: 10px;
+}
+.notify_card_body {
+  padding: 8px 16px;
+}
+.notify_card_header {
+  background-color: $accent-2;
+  border-radius: 10px 10px 0 0;
+  font-size: 12px;
+}
+.notify_app_name {
+  margin-left: 16px;
+}
+.notify_close_btn {
+  padding: 4px;
+  margin-right: 16px;
+}
+
+/* ----------- Weather ----------- */
+.weather_icon {
+  font-size: 96px;
+  color: $accent-2;
+  margin-right: 16px;
+}
+.weather_text {
+  font-size: 30px;
+  color: $accent-1;
+  margin-right: 16px;
+}
+.weather_temp {
+  font-size: 24px;
+  color: $accent-0;
+}
+.weather_feel {
+  font-size: 16px;
+  color: $accent-0;
+  margin-right: 16px;
+}
+.weather_humid {
+  font-size: 16px;
+  color: $white;
+}
+
+
+/* ----------- Applications ----------- */
+$app-btn-size: 48px;
+
+.app-btn {
+  padding: 12px;
+  border-radius: 100%;
+  background-color: rgba(0,0,0,0.3);
+}
+.app-btn:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+
+.app-icon {
+  background-size: $app-btn-size;
+  min-width:       $app-btn-size;
+  min-height:      $app-btn-size;
+}
+
+/* ----------- Power ----------- */
+.power_btn {
+  padding: 8px;
+  margin: 0 4px;
+  min-width: 30px;
+  min-height: 30px;
+  border: $red solid 1px;
+  color: $red;
+  border-radius: 50px;
+  font-size: 24px;
+}
+.power_btn:hover {
+  background-color: $red;
+  color: $white;
+}

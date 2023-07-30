@@ -5,14 +5,11 @@ cd `dirname $0`
 case $1 in
   "Suspend")
     systemctl suspend
-    slock
   ;;
   "Hibernate")
     systemctl hibernate
-    slock
   ;;
   "Lock")
-    slock
   ;;
   "Shutdown")
     shutdown now

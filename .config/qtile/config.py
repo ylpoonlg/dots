@@ -32,7 +32,7 @@ cursor_warp = False
 # Hooks
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.run([os.path.join(config_path, 'scripts/reload-xorg.sh')])
+    # subprocess.call(['/home/long/.local/bin/setup-screens.sh'])
     subprocess.run([os.path.join(config_path, 'scripts/autostart.sh')])
     subprocess.run([os.path.join(config_path, 'scripts/launchbar.sh')])
 
@@ -63,7 +63,7 @@ def reload_screen_config(_):
     num_screens = int(os.popen("xrandr | grep ' connected' | wc -l").read())
     if len(screens) != num_screens:
         qtile.cmd_reload_config()
-        subprocess.call([os.path.join(config_path, 'scripts/reload-xorg.sh')])
+        subprocess.call(['/home/long/.local/bin/setup-screens.sh'])
         time.sleep(0.5)
         subprocess.call([os.path.join(config_path, 'scripts/launchbar.sh')])
         time.sleep(0.5)
