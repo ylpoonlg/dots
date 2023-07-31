@@ -1,17 +1,17 @@
 #!/bin/bash
 
-EWW_PATH=~/.local/bin/eww
+EWW=/home/long/.local/bin/eww
 
-killall $EWW_PATH
+killall ${EWW}
 sleep 0.5
-$EWW_PATH daemon &
+${EWW} daemon &
 sleep 0.5
 
-$EWW_PATH open bar &
+${EWW} open bar &
 
 numscreens=$(xrandr | grep ' connected' | wc -l)
 if [ $numscreens -gt 1 ]; then
-    $EWW_PATH open bar2 &
+    ${EWW} open bar2 &
 fi
 
 echo "Finished..."

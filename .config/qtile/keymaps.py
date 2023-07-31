@@ -3,7 +3,7 @@ import os
 from libqtile.lazy import lazy
 from libqtile.config import Key
 
-from settings import config_path, terminal, browser, filemanager
+from settings import *
 
 
 # Key Bindings
@@ -64,36 +64,38 @@ keys = [
     
     # Qtile
     Key([mod, "control", "shift"], "r",
-        lazy.spawn('/home/long/.local/bin/setup-screens.sh'),
+        lazy.spawn('/usr/local/bin/setup-screens.sh'),
+        lazy.spawn(setup_screens),
         lazy.restart(),
-        lazy.spawn(os.path.join(config_path, 'scripts/launchbar.sh')),
-        desc="Restart Qtile and Reload Xorg config"),
+        lazy.spawn(loadbar),
+        desc="Restart Qtile and Reload screens config"),
     Key([mod, "control"], "r",
         lazy.restart(),
-        lazy.spawn(os.path.join(config_path, 'scripts/launchbar.sh')),
+        lazy.spawn(loadbar),
         desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "control"], "q",
+        lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod, "control"], "l",
-        lazy.spawn(os.path.join(config_path, 'scripts/power-menu.sh')),
-        desc="Select power management options",
-    ),
+        lazy.spawn(power_menu),
+        desc="Select power management options"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "f", lazy.window.toggle_floating(),
         desc="Switch back to tiling mode"),
 
     # Applications
-    Key([mod], "p", lazy.spawn(os.path.expanduser("~/.config/rofi/scripts/launcher-1"))), # Rofi
+    Key([mod], "p", lazy.spawn(rofi_launcher)), # Rofi
+    Key([mod], "d", lazy.spawn(open_dashmenu)), # Dashboard
     Key([mod], "Return", lazy.spawn(terminal)), # Terminal
-    Key([mod], "b", lazy.spawn(browser)), # Browser
-    Key([mod], "f", lazy.spawn(filemanager)), # File Manager
-    Key([mod], "t", lazy.spawn("subl")), # Text Editor
+    Key([mod], "b", lazy.spawn(browser)),       # Browser
+    Key([mod], "f", lazy.spawn(filemanager)),   # File Manager
+    Key([mod], "t", lazy.spawn(texteditor)),    # Text Editor
 
     # Laptop
-    Key([], "XF86MonBrightnessUp", lazy.spawn(config_path + "/scripts/brightness.sh set +5%")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn(config_path + "/scripts/brightness.sh set 5%-")),
+    Key([], "XF86MonBrightnessUp",   lazy.spawn(brightness_up)),
+    Key([], "XF86MonBrightnessDown", lazy.spawn(brightness_dn)),
 
     # Volume
-    Key([], "XF86AudioRaiseVolume", lazy.spawn(config_path + "/scripts/volume.sh set +5%")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn(config_path + "/scripts/volume.sh set -5%")),
-    Key([], "XF86AudioMute", lazy.spawn(config_path + "/scripts/volume.sh mute toggle")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(volume_up)),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(volume_dn)),
+    Key([], "XF86AudioMute",        lazy.spawn(volume_mute)),
 ]

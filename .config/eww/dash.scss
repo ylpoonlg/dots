@@ -37,6 +37,15 @@
 }
 
 /* ----------- Disk ----------- */
+.disk-usage-cir {
+    color: $orange;
+}
+
+.disk-loc {
+    color: $orange;
+    font-size: 8px;
+}
+
 .disk-space {
   color: $orange;
   font-size: 24px;
@@ -71,7 +80,7 @@
 
 .timedate-date {
   color: $white;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 /* ----------- Music ----------- */
@@ -81,7 +90,7 @@
 }
 
 .music_artist {
-  color: $white;
+  color: $orange;
   font-size: 16px;
 }
 
@@ -127,24 +136,22 @@
 /* ----------- Weather ----------- */
 .weather_icon {
   font-size: 96px;
-  color: $accent-2;
-  margin-right: 16px;
+  color: $yellow;
 }
 .weather_text {
   font-size: 30px;
-  color: $accent-1;
-  margin-right: 16px;
+  color: $orange;
 }
 .weather_temp {
   font-size: 24px;
-  color: $accent-0;
+  color: $cyan;
 }
 .weather_feel {
   font-size: 16px;
-  color: $accent-0;
-  margin-right: 16px;
+  color: $cyan;
 }
 .weather_humid {
+  margin-left: 16px;
   font-size: 16px;
   color: $white;
 }

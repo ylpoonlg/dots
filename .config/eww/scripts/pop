@@ -1,13 +1,15 @@
 #!/bin/bash
 
+EWW="/home/long/.local/bin/eww"
+
 close_all() {
-  eww close menu menu_closer
-  eww close popup_closer
-  eww close network
-  eww close bluetooth
-  eww close volume
-  eww close battery
-  eww close calendar
+  ${EWW} close menu menu_closer
+  ${EWW} close popup_closer
+  ${EWW} close network
+  ${EWW} close bluetooth
+  ${EWW} close volume
+  ${EWW} close battery
+  ${EWW} close calendar
 
   rm -f "$HOME/.cache/eww-menu.lock"
   rm -f "$HOME/.cache/eww-network.lock"
@@ -23,11 +25,11 @@ menu() {
 
   if [[ ! -f $LOCK_FILE ]]; then
     close_all
-    eww open menu_closer
-    eww open menu 
+    ${EWW} open menu_closer
+    ${EWW} open menu 
     touch $LOCK_FILE
   else
-    eww close menu menu_closer
+    ${EWW} close menu menu_closer
     rm $LOCK_FILE
   fi
 }
@@ -38,11 +40,11 @@ network() {
 
   if [[ ! -f $LOCK_FILE && $1 != "close" ]]; then
     close_all
-    eww open popup_closer
-    eww open network
+    ${EWW} open popup_closer
+    ${EWW} open network
     touch $LOCK_FILE
   else
-    eww close network popup_closer
+    ${EWW} close network popup_closer
     rm $LOCK_FILE
   fi
 }
@@ -52,11 +54,11 @@ bluetooth() {
 
   if [[ ! -f $LOCK_FILE ]]; then
     close_all
-    eww open popup_closer
-    eww open bluetooth
+    ${EWW} open popup_closer
+    ${EWW} open bluetooth
     touch $LOCK_FILE
   else
-    eww close bluetooth popup_closer
+    ${EWW} close bluetooth popup_closer
     rm $LOCK_FILE
   fi
 }
@@ -66,11 +68,11 @@ volume() {
 
   if [[ ! -f $LOCK_FILE ]]; then
     close_all
-    eww open popup_closer
-    eww open volume
+    ${EWW} open popup_closer
+    ${EWW} open volume
     touch $LOCK_FILE
   else
-    eww close volume popup_closer
+    ${EWW} close volume popup_closer
     rm $LOCK_FILE
   fi
 }
@@ -80,11 +82,11 @@ battery() {
 
   if [[ ! -f $LOCK_FILE ]]; then
     close_all
-    eww open popup_closer
-    eww open battery
+    ${EWW} open popup_closer
+    ${EWW} open battery
     touch $LOCK_FILE
   else
-    eww close battery popup_closer
+    ${EWW} close battery popup_closer
     rm $LOCK_FILE
   fi
 }
@@ -94,11 +96,11 @@ calendar() {
 
   if [[ ! -f $LOCK_FILE ]]; then
     close_all
-    eww open popup_closer
-    eww open calendar
+    ${EWW} open popup_closer
+    ${EWW} open calendar
     touch $LOCK_FILE
   else
-    eww close calendar popup_closer
+    ${EWW} close calendar popup_closer
     rm $LOCK_FILE
   fi
 }

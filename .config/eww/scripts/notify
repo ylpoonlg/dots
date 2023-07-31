@@ -38,13 +38,12 @@ create_cache() {
 make_literal() {
   local literal
   children=$(cat $DUNST_LOG)
-  height=200  # Height of the scroll box
   if [[ -z $children ]]; then
-    literal='(box :orientation "v" :space-evenly true :height '$height'
+    literal='(box :orientation "v" :space-evenly true :vexpand true
         (label :vexpand true :valign "center" :wrap true
           :class "notify_empty_label" :text "No Notifications"))'
   else
-    literal='(scroll :height '$height' :vscroll true
+    literal='(scroll :vexpand true :vscroll true
         (box :orientation "v" :vexpand true :class "notify_scroll_box"
              :spacing 10 :space-evenly false '$children'))'
   fi

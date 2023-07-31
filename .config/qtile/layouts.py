@@ -61,15 +61,14 @@ floating_layout = layout.Floating(
         Match(wm_class='file_progress'),
         Match(wm_class='splash'),
         Match(wm_class='notification'),
-        Match(wm_class='confirmreset'),  # gitk
-        Match(wm_class='makebranch'),  # gitk
-        Match(wm_class='maketag'),  # gitk
-        Match(wm_class='ssh-askpass'),  # ssh-askpass
-        Match(title='branchdialog'),  # gitk
-        Match(title='pinentry'),  # GPG key password entry
-        Match(wm_class='nm-connection-editor'), # NM Applet
+        Match(wm_class='confirmreset'),
+        Match(wm_class='makebranch'),
+        Match(wm_class='maketag'),
+        Match(wm_class='ssh-askpass'),
+        Match(title='branchdialog'),
+        Match(title='pinentry'),
+        Match(wm_class='nm-connection-editor'),
         Match(wm_class='plank'),
         Match(wm_class='plasmawindowed'),
-        Match(wm_class='lgwid-win'),
     ],
 )

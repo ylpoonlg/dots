@@ -6,11 +6,12 @@
 (defpoll USR_UNAME :interval "1000m" "whoami")
 
 ;; Uptime
-(defpoll UPHOUR :interval "5s" `uptime -p | awk '{print $2}'`)
-(defpoll UPMIN :interval "5s" `uptime -p | awk '{print $4}'`)
+(defpoll UPTIME :interval "5s" `awk '{print int($1/3600/24)"D "int($1/3600%24)"H "int(($1%3600)/60)"M"}' /proc/uptime`)
 
 ;; Disk
-(defpoll DISK_FREE :interval "5s" `df -h / | awk '{print $4}' | tail -n 1 | sed 's/G/GB/'`)
+(defpoll DISK_FREE :interval "5s" `df -h / | awk '{print $4}' | tail -n 1 | sed 's/G//'`)
+(defpoll DISK_USED :interval "5s" `df -h / | awk '{print $3}' | tail -n 1 | sed 's/G//'`)
+(defpoll DISK_TOTAL :interval "5s" `df -h / | awk '{print $2}' | tail -n 1 | sed 's/G//'`)
 
 ;; Controls
 (defpoll brightness :interval "1s" :initial "50" "brightnessctl g")
@@ -61,7 +62,7 @@
        :orientation "h" :space-evenly true
        :height 80
     (label :class "uptime-time" :text "Uptime")
-    (label :class "uptime-time" :text "${UPHOUR}H ${UPMIN}M")
+    (label :class "uptime-time" :text "${UPTIME}")
   )
 )
 
@@ -70,8 +71,14 @@
   (box :class "menu_win"
        :orientation "h" :space-evenly true
        :height 80
-    (label :class "disk-space" :text "Disk")
-    (label :class "disk-space" :text "${DISK_FREE}")
+    (label :class "disk-space" :style "font-size: 36px" :text "")
+
+    (label :class "disk-space" :text "${DISK_FREE}GB Free")
+
+    (circular-progress :class "disk-usage-cir" :thickness 8
+                       :value "${round(DISK_USED/DISK_TOTAL * 100, 0)}"
+      (label :class "disk-loc" :text "/")
+    )
   )
 )
 
@@ -96,10 +103,10 @@
 ;; Time Date
 (defwidget timedate []
   (box :class "menu_win"
-       :orientation "v" :space-evenly true
-       :height 200
+       :orientation "v" :space-evenly false
+       :height 100
     (label :class "timedate-time" :text "${TIME_HOUR}:${TIME_MIN}")
-    (label :class "timedate-dow" :text "${DATE_DOW}")
+    (label :class "timedate-dow"  :text "${DATE_DOW}")
     (label :class "timedate-date" :text "${DATE}")
   )
 )
@@ -109,9 +116,9 @@
   (box :class "menu_win"
        :orientation "v" :space-evenly false
        :height 100
-    (label :class "music_name" :limit-width 30
+    (label :class "music_name" :limit-width 25
            :text "${music_track_title}")
-    (label :class "music_artist" :limit-width 30
+    (label :class "music_artist" :limit-width 25
            :text "${music_track_artist}")
     (box :class "music_control" :orientation "h"
          :space-evenly false :halign "center" :spacing 16
@@ -127,17 +134,17 @@
 
 ;; Notification
 (defwidget notifications []
-  (box :class "menu_win"
-       :orientation "v" :space-evenly false :valign "start"
+  (box :class "menu_win" :orientation "v" :space-evenly false
+       :vexpand true
     (box :class "notify_box_title_box" :orientation "h"
-         :space-evenly true :valign "center"
+         :space-evenly true
       (label :class "notify_box_title accent-1"
         :halign "start" :text "Notifications")
       (button :halign "end"
           :onclick "scripts/notify clear"
         "")
     )
-    (literal :content notifications-cards)
+    (literal :vexpand true :content notifications-cards)
   )
 )
 
@@ -150,8 +157,8 @@
     (box :orientation "h" :space-evenly false :halign "center"
       (label :class "weather_temp" :text "${wtemp}")
       (label :class "weather_feel" :text "/${wfeel}")
+      (label :class "weather_humid" :text " ${whumid}%")
     )
-    (label :class "weather_humid" :text "Humidity ${whumid}%")
   )
 )
 
@@ -185,11 +192,11 @@
 ;; Power Buttons
 (defwidget power_menu []
   (box :class "menu_win" :orientation "v" :space-evenly false :height 100
-    (eventbox :cursor "pointer"
+    (eventbox :cursor "pointer" :valign "center" :vexpand true
               :onhover     "eww update power_reveal=true"
               :onhoverlost "eww update power_reveal=false"
       (box :class "power_box" :orientation "h" :space-evenly false
-           :halign "center"
+           :halign "center" :valign "center" :vexpand true
           ;; Left
           (revealer :transition "slideleft" :duration "250ms"
               :reveal power_reveal
@@ -228,7 +235,7 @@
        :space-evenly false
 
     ;; Left Column
-    (box :orientation "v" :space-evenly false :width 300
+    (box :orientation "v" :space-evenly false :width 400
       (timedate)
       (music)
       (notifications)
