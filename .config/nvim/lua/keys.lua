@@ -1,67 +1,65 @@
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
---map("", "<ScrollWheelUp>", "<C-y>", opts)
---map("", "<ScrollWheelDown>", "<C-e>", opts)
-
-map("n", "<C-j>", "<C-W>j", opts)
-map("n", "<C-k>", "<C-W>k", opts)
-map("n", "<C-h>", "<C-W>h", opts)
-map("n", "<C-l>", "<C-W>l", opts)
-map("n", "H", "^", opts)
-map("n", "L", "$", opts)
-map("n", "rhi", ":resize +2<CR>", opts)
-map("n", "rhm", ":resize -2<CR>", opts)
-map("n", "rvi", ":vert resize +2<CR>", opts)
-map("n", "rvm", ":vert resize -2<CR>", opts)
-map("n", "n", "nzzzv", opts)
-map("n", "N", "Nzzzv", opts)
-
-map("", "<C-n>", ":tabnew<CR>", opts)
-map("", "<C-w>", ":tabclose<CR>", opts)
-map("n", "<Tab>", ":tabnext<CR>", opts)
-map("n", "<S-Tab>", ":tabprevious<CR>", opts)
-
-map("n", "<C-a>", ":%y+<CR>", opts) -- Copy whole file
-map("v", "<C-c>", "\"+y", opts) -- Copy selected
-map("v", "H", "^", opts)
-map("v", "L", "$", opts)
-map("v", "<", "<gv", opts)
-map("v", ">", ">gv", opts)
-map("i", "<C-BS>", "<Esc>cvb", opts)
+-- Cursor
+map("n", "<S-h>", "^", opts)
+map("n", "<S-l>", "$", opts)
 map("n", "<C-d>", "<C-d>zz", opts)
 map("n", "<C-u>", "<C-u>zz", opts)
-map("", "x", "\"_x", opts)
+map("n", "n", "nzzzv", opts)
+map("n", "<S-n>", "Nzzzv", opts)
+map("n", "<C-I>", "<C-S-I>", opts) -- Previous cursor
 
-vim.cmd([[
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-]])
+-- Windows
+map("n", "<C-j>", "<C-w>j", opts)
+map("n", "<C-k>", "<C-w>k", opts)
+map("n", "<C-h>", "<C-w>h", opts)
+map("n", "<C-l>", "<C-w>l", opts)
+map("n", "<leader>rzj", ":resize +4<CR>", opts)
+map("n", "<leader>rzk", ":resize -4<CR>", opts)
+map("n", "<leader>rzl", ":vert resize +4<CR>", opts)
+map("n", "<leader>rzh", ":vert resize -4<CR>", opts)
 
+-- Editing
+map("n", "x", "\"_x", opts)
+map("n", "c", "\"_c", opts)
+map("x", "<leader>d", "\"_d", opts)
+map("x", "<leader>p", "\"_dP", opts) -- Discard overwritten text for paste
+
+-- Buffers
+map("n", "<C-w>", ":bdelete<CR>", opts)
+map("n", "<A-Tab>", ":bnext<CR>", opts)
+map("n", "<A-S-Tab>", ":bprevious<CR>", opts)
+
+-- Tabs
+map("n", "<leader><C-n>", ":tabnew<CR>", opts)
+map("n", "<leader><A-Tab>", ":tabnext<CR>", opts)
+map("n", "<leader><A-S-Tab>", ":tabprevious<CR>", opts)
+
+-- Misc.
+map("n", "<C-a>", ":%y+<CR>", opts) -- Copy whole file
 map("n", "z]", "v}kzf", opts)
 map("n", "z[", "{jv}kzf", opts)
 
+-- Insert Mode
+map("i", "<C-BS>", "<Esc>cvb", opts)
+
+-- Visual Mode
+map("v", "<C-c>", "\"+y", opts) -- Copy selected
+map("v", "<S-h>", "^", opts)
+map("v", "<S-l>", "$", opts)
+map("v", "<", "<gv", opts)
+map("v", ">", ">gv", opts)
+map("v", "<S-j>", ":m '>+1<CR>gv=gv", opts)
+map("v", "<S-k>", ":m '<-2<CR>gv=gv", opts)
+
+-- Identifier
 vim.cmd([[
-tnoremap <Esc> <C-\><C-n>
-tnoremap <C-J> <C-\><C-n><C-W>j
-tnoremap <C-H> <C-\><C-n><C-W>h
-tnoremap <C-K> <C-\><C-n><C-W>k
-"tnoremap <C-L> <C-\><C-n><C-W>l
+    function! SynGroup()
+        let l:s = synID(line('.'), col('.'), 1)
+        echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+    endfun
+    map gm :call SynGroup()<CR>
 ]])
 
--- Plugins
-map("n", "K",  "<cmd>Lspsaga hover_doc<CR>", opts)
-map("n", "ca", "<cmd>Lspsaga code_action<CR>", opts)
-map("n", "cd", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-map("n", "<C-s>", ":Lspsaga outline<CR>", opts)
 map("n", "<C-f>", ":NvimTreeToggle<CR>", opts)
-map("n", "ff", ":Telescope find_files<CR>", opts)
-map("n", "fg", ":Telescope live_grep<CR>", opts)
-
-vim.cmd([[
-function! SynGroup()
-    let l:s = synID(line('.'), col('.'), 1)                                       
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfun
-map gm :call SynGroup()<CR>
-]])

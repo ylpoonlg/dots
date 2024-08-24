@@ -3,7 +3,7 @@
 restart_trayer() {
   killall trayer
   sleep 0.5
-  exec trayer --monitor 0 --edge top --align right --expand false --distance 4 --width 8 --height 40 --margin 480 --tint 0x22252e --transparent true --alpha 26 &
+  exec trayer --monitor 0 --edge top --align right --expand false --distance 4 --width 8 --height 40 --margin 480 --tint 0x0D1017 --transparent true --alpha 25 &
 }
 
 restart_qtile() {

@@ -31,7 +31,11 @@ group_props = [
         "matches": [Match(wm_class=["systemsettings"])],
     }, {"name": '',
         "switch-key": '8',
-        "matches": [Match(wm_class=["signal"]), Match(wm_class=["discord"])],
+        "matches": [
+            Match(wm_class=["signal"]),
+            Match(wm_class=["discord"]),
+            Match(wm_class=["thunderbird"]),
+        ],
     }, {"name": '',
         "switch-key": '9',
         "matches": [],

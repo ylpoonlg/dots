@@ -35,10 +35,11 @@ endif
 " Required:
 call plug#begin(expand('~/.vim/plugged'))
 
-Plug 'itchyny/lightline.vim'
-"Plug 'vim-scripts/grep.vim'
+" Colorschemes
+Plug 'Luxed/ayu-vim'
 Plug 'crusoexia/vim-monokai'
-Plug 'tomasr/molokai'   " fallback
+
+Plug 'itchyny/lightline.vim'
 
 " Assembly
 Plug 'alisdair/vim-armasm'
@@ -61,13 +62,13 @@ set encoding=utf-8
 set backspace=indent,eol,start
 
 "" Tabs. May be overridden by autocmd rules
-set tabstop=4
-set softtabstop=0   " Auto: use tabstop
-set shiftwidth=0    " Auto: use tabstop
 set expandtab
 set smarttab
 set linebreak
 set nowrap
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 
 "" Enable hidden buffers
 set hidden
@@ -91,10 +92,9 @@ set cursorline
 set noshowmode
 set nomodeline
 
-set termguicolors
 syntax on
-
-colorscheme monokai
+set termguicolors
+set term=kitty
 
 set mouse=a
 set splitright
@@ -102,6 +102,22 @@ set splitbelow
 set nocompatible
 set wildmenu
 
+
+"*****************************************************************************
+"" Styles
+"*****************************************************************************
+
+let g:ayucolor="dark"
+colorscheme ayu
+
+highlight Normal guibg=NONE ctermbg=NONE
+highlight EndOfBuffer guibg=NONE cterm=NONE
+highlight NonText guibg=NONE cterm=NONE
+highlight SpecialKey guibg=NONE cterm=NONE
+highlight LineNr guibg=NONE cterm=NONE
+highlight CursorLine guibg=NONE cterm=NONE
+highlight CursorLineNr guibg=NONE cterm=NONE
+highlight ErrorMsg guibg=NONE cterm=NONE
 
 
 "*****************************************************************************

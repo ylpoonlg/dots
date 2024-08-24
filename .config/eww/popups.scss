@@ -33,21 +33,21 @@
   color: $orange;
 }
 .connitem_name.disconnected {
-  color: $cyan;
+  color: $blue;
 }
 
 .connitem_conn_btn {
   margin-right: 8px;
   min-width: 30px;
   min-height: 30px;
-  border: $gray solid 1px;
+  border: $gray-75 solid 1px;
   border-radius: 30px;
 }
 .connitem_conn_btn:hover {
-  background-color: $gray;
+  background-color: $gray-75;
 }
 .connitem_conn_btn.connected {
-  color: $gray;
+  color: $gray-75;
 }
 .connitem_conn_btn.connected:hover {
   color: $white;
@@ -76,11 +76,11 @@
   min-width: 16px;
   min-height: 16px;
   color: $white;
-  border: $gray solid 1px;
+  border: $gray-75 solid 1px;
   border-radius: 30px;
 }
 .vol_device_btn:hover {
-  background-color: $gray;
+  background-color: $gray-75;
 }
 
 
@@ -101,7 +101,7 @@
 .bat_chargemode_btn {
   font-size: 20px;
   padding: 8px;
-  color: $cyan; 
+  color: $blue; 
 }
 .bat_chargemode_btn:hover {
   color: $blue; 

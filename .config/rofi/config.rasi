@@ -175,7 +175,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "./colors/monokai-lg.rasi"
+@import                          "./colors/ayu.rasi"
 
 * {
     font: "JetBrains Mono 10";

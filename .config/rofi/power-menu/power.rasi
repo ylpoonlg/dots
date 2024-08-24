@@ -16,7 +16,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "../colors/monokai-lg.rasi"
+@import                          "../colors/ayu.rasi"
 
 /*****----- Main Window -----*****/
 window {
@@ -32,7 +32,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      2px solid;
-    border-radius:               12px;
+    border-radius:               16px;
     border-color:                @border;
     background-color:            @background;
     cursor:                      "default";
@@ -54,9 +54,9 @@ mainbox {
 /*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     8px;
     margin:                      0px;
-    padding:                     15px;
+    padding:                     16px;
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @border;
@@ -99,18 +99,15 @@ listview {
     fixed-height:                true;
     fixed-columns:               true;
     
-    spacing:                     5px;
+    spacing:                     0px;
     margin:                      0px;
     padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @selected;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      "default";
 }
 scrollbar {
-    handle-width:                5px ;
+    handle-width:                4px ;
     handle-color:                @selected;
     border-radius:               0px;
     background-color:            @background-alt;

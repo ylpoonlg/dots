@@ -14,4 +14,6 @@ if [ $numscreens -gt 1 ]; then
     ${EWW} open bar2 &
 fi
 
+nitrogen --restore
+
 echo "Finished..."

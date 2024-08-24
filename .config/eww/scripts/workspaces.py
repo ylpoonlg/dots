@@ -1,5 +1,5 @@
 import argparse
-from libqtile.command.client import CommandClient
+from libqtile.command.client import InteractiveCommandClient
 
 parser = argparse.ArgumentParser(description='Get workspace widgets')
 parser.add_argument("--monitor", type=int, help="Current monitor")
@@ -10,9 +10,10 @@ monitor = 0  # assume bar is displaying on monitor 0
 if args.monitor:
     monitor = args.monitor
 
-c = CommandClient()
+c = InteractiveCommandClient()
+
 groups = {}
-for name, group in c.call('groups').items():
+for name, group in c.get_groups().items():
     if name == "scratchpad":
         continue
     occupied     = len(group["windows"]) > 0

@@ -19,7 +19,7 @@
     (literal :content net_list)
     (box :orientation "h" :space-evenly false :halign "end" :spacing 16
       (button :class "popup_action_btn" :tooltip "Open Network Settings"
-              :onclick "scripts/pop network && (exec systemsettings kcm_networkmanagement &)"
+              :onclick "scripts/pop network && (exec nm-connection-editor &)"
         "")
       )
     )
@@ -54,7 +54,7 @@
     (literal :content bluetooth_list)
     (box :orientation "h" :space-evenly false :halign "end" :spacing 16
       (button :class "popup_action_btn" :tooltip "Open Bluetooth Settings"
-              :onclick "scripts/pop bluetooth && (exec systemsettings kcm_bluetooth &)"
+              :onclick "scripts/pop bluetooth && (exec blueman-manager &)"
         "")
       )
     )
@@ -145,6 +145,38 @@
       :width "320px" 
       :height "100px")
   (volume_win))
+
+;; Volume Change Popup
+(defwidget volume_change_win []
+  (box :class "popup_win" :orientation "v" :space-evenly false :spacing 20
+    (label :class "vol_device_txt" :text "Volume")
+
+    (box :orientation "h" :space-evenly false :spacing 16
+      (button :class "volbar_val" :onclick "scripts/volume toggle-mute-sink"
+        :tooltip "Mute/Unmute" "${sink_muted ? "" : sink_volume}")
+      (scale :class "volbar"
+             :value "${round(sink_volume, 0)}"
+             :mark "vol"
+             :onchange "scripts/volume set-sink-volume {}" 
+             :orientation "h"
+             :max 100
+             :min 0
+             :hexpand true
+         )
+      )
+  )
+)
+
+(defwindow volume_change
+  :geometry (geometry
+    :x "0px" 
+    :y "-20%" 
+    :anchor "bottom center"
+    :width "320px" 
+    :height "100px"
+  )
+  (volume_change_win)
+)
 
 
 ;; Battery

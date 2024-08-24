@@ -1,0 +1,25 @@
+/**
+ * Theme by ylpoonlg
+ */
+
+* {
+    red:                         #D95757;
+    pink:                        #F07178;
+    orange:                      #FF8F40;
+    yellow:                      #E6B673;
+    green:                       #AAD94C;
+    blue:                        #59C2FF;
+    purple:                      #D2A6FF;
+    white:                       #BFBDB6;
+    black:                       #0B0E14;
+
+    background:                  #0B0E14E6;
+    background-alt:              #11151CE6;
+    foreground:                  @white;
+    foreground-alt:              @yellow;
+    border:                      @blue;
+    selected:                    @orange;
+    active:                      @green;
+    urgent:                      @pink;
+}
+

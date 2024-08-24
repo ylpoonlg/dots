@@ -1,0 +1,58 @@
+{
+    "LG-Template": {
+        "prefix": ["lgtemp"],
+        "body": [
+            "\\documentclass[a4]{article}",
+            "",
+            "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",
+            "",
+            "\\usepackage{amsmath}",
+            "\\usepackage{amssymb}",
+            "\\usepackage{amsthm}",
+            "\\usepackage{geometry}",
+            "\\usepackage{float}",
+            "\\usepackage{caption}",
+            "\\usepackage{graphicx}",
+            "\\usepackage{listings}",
+            "\\usepackage{subfig}",
+            "",
+            "\\title{${1:Title}}",
+            "\\author{${2:Yat Long Poon}}",
+            "",
+            "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",
+            "",
+            "\\begin{document}",
+            "\\maketitle",
+            "$0",
+            "\\end{document}"
+        ],
+        "description": "My custom latex template."
+    },
+    "Figure": {
+        "prefix": ["fig", "figure"],
+        "body": [
+            "\\begin{figure}[h]",
+            "\\centering",
+            "\\includegraphics[height=${1:2in}]{${2:./img.png}}",
+            "\\caption{${3:An image.}}",
+            "\\label{fig:${4:fig_label}}",
+            "\\end{figure}"
+        ]
+    },
+    "Sub-figures": {
+        "prefix": ["subfig", "subfigure"],
+        "body": [
+            "\\begin{figure}[h]",
+            "\\centering",
+            "\\subfloat[]{",
+            "   \\includegraphics[height=${1:2in}]{${2:./img.png}}",
+            "}",
+            "\\subfloat[]{",
+            "   \\includegraphics[height=${1:2in}]{${3:./img2.png}}",
+            "}",
+            "\\caption{${4:Two images.}}",
+            "\\label{fig:${5:fig_label}}",
+            "\\end{figure}"
+        ]
+    }
+}

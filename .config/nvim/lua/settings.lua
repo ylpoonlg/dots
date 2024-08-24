@@ -1,6 +1,7 @@
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.laststatus = 2
-vim.opt.showtabline = 2
+vim.opt.showtabline = 0
 vim.opt.cursorline = true
 vim.opt.showmode = false
 vim.opt.modeline = false
@@ -15,8 +16,9 @@ vim.cmd("set colorcolumn=80")
 vim.opt.foldmethod = "manual"
 
 vim.opt.tabstop = 4
-vim.opt.softtabstop = 4 vim.opt.shiftwidth = 4
-vim.opt.mouse = 'a'
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.mouse = "a"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.compatible = false
@@ -27,14 +29,17 @@ vim.opt.ignorecase = true
 vim.opt.showmatch = true
 vim.opt.pumheight = 10
 
-vim.opt.undodir = vim.fn.expand('~/.cache/nvim/undodir')
+vim.opt.undodir = vim.fn.expand("~/.cache/nvim/undodir")
 vim.opt.undofile = true
 vim.opt.history=512
 
 vim.opt.incsearch = true
 
-vim.cmd('syntax on')
+vim.cmd("syntax on")
 vim.opt.termguicolors = true
+
+vim.opt.timeoutlen = 3000
+vim.g.mapleader = " "
 
 -- Terminal
 vim.cmd(
@@ -45,10 +50,6 @@ vim.cmd(
 " | endif"..
 " | endif"
 )
-vim.cmd([[
-command TermJ :split | :term
-command TermL :vsplit | :term
-]])
 
 -- Session
 local session_cache_path = "~/.cache/nvim/last_session.nvim"

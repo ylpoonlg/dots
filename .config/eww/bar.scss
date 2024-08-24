@@ -41,7 +41,7 @@ tooltip label {
   color: $accent-1;
 }
 .wmlayout_btn {
-  color: $gray;
+  color: $gray-50;
   margin-left: 30px;
 }
 
@@ -55,10 +55,10 @@ tooltip label {
   margin: 0 2px;
   padding: 2px 4px;
   border-radius: 50px;
-  color: $gray;
+  color: $gray-75;
 }
 .workspaces button:hover {
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba($gray-50, .2);
 }
 
 .workspaces button.ws_occupied {

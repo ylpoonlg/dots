@@ -7,8 +7,8 @@ from style import colors
 
 # Layouts
 borders_params = {
-    "border_focus": colors['mnk-orange'],
-    "border_normal": colors['mnk-gray'],
+    "border_focus": colors['orange'],
+    "border_normal": colors['gray-75'],
     "border_width": 2,
 }
 layouts = [
@@ -47,9 +47,7 @@ mouse = [
 ]
 
 floating_layout = layout.Floating(
-    border_focus = colors['mnk-orange'],
-    border_normal = colors['mnk-gray'],
-    border_width = 3,
+    **borders_params,
     float_rules=[
         # Use "xprop | grep WM_CLASS" to get the class names
         *layout.Floating.default_float_rules,

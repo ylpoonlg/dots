@@ -64,13 +64,11 @@ keys = [
     
     # Qtile
     Key([mod, "control", "shift"], "r",
-        lazy.spawn('/usr/local/bin/setup-screens.sh'),
-        lazy.spawn(setup_screens),
-        lazy.restart(),
-        lazy.spawn(loadbar),
+        lazy.reload_config(),
+        lazy.spawn(screen_change),
         desc="Restart Qtile and Reload screens config"),
     Key([mod, "control"], "r",
-        lazy.restart(),
+        lazy.reload_config(),
         lazy.spawn(loadbar),
         desc="Restart Qtile"),
     Key([mod, "control"], "q",
@@ -89,6 +87,7 @@ keys = [
     Key([mod], "b", lazy.spawn(browser)),       # Browser
     Key([mod], "f", lazy.spawn(filemanager)),   # File Manager
     Key([mod], "t", lazy.spawn(texteditor)),    # Text Editor
+    Key([mod], "e", lazy.spawn(emailclient)),   # Email Client
 
     # Laptop
     Key([], "XF86MonBrightnessUp",   lazy.spawn(brightness_up)),
@@ -98,4 +97,12 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn(volume_up)),
     Key([], "XF86AudioLowerVolume", lazy.spawn(volume_dn)),
     Key([], "XF86AudioMute",        lazy.spawn(volume_mute)),
+
+    # Keyboard
+    Key([], "Find", lazy.spawn("setxkbmap -layout us -variant dvorak-lg")),
+    Key(["shift"], "Find", lazy.spawn("setxkbmap -layout us")),
+    Key(["control"], "F9", lazy.spawn("setxkbmap -layout us -variant dvorak-lg")),
+    Key(["control", "shift"], "F9", lazy.spawn("setxkbmap -layout us")),
+    Key(["control"], "F10", lazy.spawn(touchpad_toggle)),
+    Key(["control", "shift"], "F10", lazy.spawn(touchscreen_toggle)),
 ]
