@@ -4,10 +4,10 @@ return {
     "onsails/lspkind.nvim",
     "folke/which-key.nvim",
     "nvim-lua/plenary.nvim",
-    {
-        "karb94/neoscroll.nvim",
-        config = true,
-    },
+    -- {
+    --     "karb94/neoscroll.nvim",
+    --     config = true,
+    -- },
     {
         "norcalli/nvim-colorizer.lua",
         config = function ()
