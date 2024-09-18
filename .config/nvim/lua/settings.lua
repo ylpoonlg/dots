@@ -40,6 +40,7 @@ vim.opt.termguicolors = true
 
 vim.opt.timeoutlen = 3000
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 -- Terminal
 vim.cmd(

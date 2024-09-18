@@ -5,7 +5,6 @@ return {
         lazy = false,
         init = function ()
             vim.cmd([[
-                let maplocalleader = '\'
                 let g:vimtex_view_method = 'zathura'
                 let g:vimtex_compiler_method = 'latexmk'
                 let g:vimtex_compiler_latexmk = {
