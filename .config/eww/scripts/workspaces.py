@@ -35,7 +35,7 @@ for name, prop in groups.items():
     if prop['thisscreen']:
         buttonclass += " ws_thisscreen"
 
-    output += f'(button :onclick "{command}" :class "{buttonclass}" "")'
+    output += f'(button :onclick "{command}" :class "{buttonclass}" "")'
     # output += f'(button :onclick "{command}" :class "{buttonclass}" "{name}")'
 
 output += ')'

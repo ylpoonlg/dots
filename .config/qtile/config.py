@@ -39,19 +39,3 @@ def autostart_hook():
     qtile.cmd_spawn(filemanager)
     qtile.cmd_spawn(emailclient)
     qtile.cmd_spawn(musicplayer)
-
-@hook.subscribe.screen_change
-def reload_screen_config(_):
-    global screens
-    num_screens = int(os.popen("xrandr | grep ' connected' | wc -l").read())
-    if len(screens) != num_screens:
-        qtile.cmd_reload_config()
-        time.sleep(1)
-        subprocess.call([screen_change])
-
-        # qtile.cmd_reload_config()
-        # time.sleep(0.2)
-        # subprocess.call([setup_screens])
-        # time.sleep(0.2)
-        # subprocess.call([loadbar])
-        # subprocess.call(['nitrogen', '--restore'])

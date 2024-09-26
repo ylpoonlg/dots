@@ -32,9 +32,9 @@ map("n", "<A-Tab>", ":bnext<CR>", opts)
 map("n", "<A-S-Tab>", ":bprevious<CR>", opts)
 
 -- Tabs
-map("n", "<leader><C-n>", ":tabnew<CR>", opts)
-map("n", "<leader><A-Tab>", ":tabnext<CR>", opts)
-map("n", "<leader><A-S-Tab>", ":tabprevious<CR>", opts)
+map("n", "<leader><C-t>", ":tabnew<CR>", opts)
+map("n", "<leader><Tab>", ":tabnext<CR>", opts)
+map("n", "<leader><S-Tab>", ":tabprevious<CR>", opts)
 
 -- Misc.
 map("n", "<C-a>", ":%y+<CR>", opts) -- Copy whole file
@@ -61,5 +61,3 @@ vim.cmd([[
     endfun
     map gm :call SynGroup()<CR>
 ]])
-
-map("n", "<C-f>", ":NvimTreeToggle<CR>", opts)

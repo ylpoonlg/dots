@@ -2,12 +2,36 @@
 
 return {
     "onsails/lspkind.nvim",
-    "folke/which-key.nvim",
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            triggers = {
+            }
+        },
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show()
+                end,
+                desc = "Buffer Local Keymaps (which-key)",
+            },
+        },
+    },
     "nvim-lua/plenary.nvim",
-    -- {
-    --     "karb94/neoscroll.nvim",
-    --     config = true,
-    -- },
+    {
+        "karb94/neoscroll.nvim",
+        config = function ()
+            require('neoscroll').setup({
+                mappings = {
+                    '<C-u>', '<C-d>',
+                    '<C-y>', '<C-e>',
+                    '<C-y>', '<C-e>',
+                },
+            })
+        end
+    },
     {
         "norcalli/nvim-colorizer.lua",
         config = function ()
@@ -23,21 +47,14 @@ return {
         end,
     },
     {
-        "ur4ltz/surround.nvim",
-        config = function ()
-            require("surround").setup {
-                mappings_style = "sandwich"
-            }
-        end
-    },
-    {
-        "numToStr/Comment.nvim",
-        config = true,
-    },
-    {
         "knubie/vim-kitty-navigator",
         config = function ()
+            local opts = { noremap = true, silent = true }
 
+            vim.keymap.set("n", "<C-A-h>", ":KittyNavigateLeft<CR>", opts)
+            vim.keymap.set("n", "<C-A-j>", ":KittyNavigateDown<CR>", opts)
+            vim.keymap.set("n", "<C-A-k>", ":KittyNavigateUp<CR>", opts)
+            vim.keymap.set("n", "<C-A-l>", ":KittyNavigateRight<CR>", opts)
         end,
     },
 }

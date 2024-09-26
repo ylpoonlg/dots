@@ -7,41 +7,41 @@ from keymaps import mod, keys
 
 # Groups
 group_props = [
-    {   "name": '',
+    {   "name": '1',
         "switch-key": '1',
         "matches": [],
-    }, {"name": '',
+    }, {"name": '2',
         "switch-key": '2',
         "matches": [],
-    }, {"name": '',
+    }, {"name": '3',
         "switch-key": '3',
         "matches": [],
-    }, {"name": '',
+    }, {"name": '4',
         "switch-key": '4',
         "matches": [Match(wm_class=["pcmanfm-qt"])],
         "layout": 'Split',
-    }, {"name": '',
+    }, {"name": '5',
         "switch-key": '5',
         "matches": [],
-    }, {"name": '',
+    }, {"name": '6',
         "switch-key": '6',
         "matches": [],
-    }, {"name": '',
+    }, {"name": '7',
         "switch-key": '7',
-        "matches": [Match(wm_class=["systemsettings"])],
-    }, {"name": '',
+        "matches": [],
+    }, {"name": '8',
         "switch-key": '8',
+        "matches": [],
+    }, {"name": '9',
+        "switch-key": '9',
+        "matches": [],
+    }, {"name": '0',
+        "switch-key": '0',
         "matches": [
             Match(wm_class=["signal"]),
             Match(wm_class=["discord"]),
             Match(wm_class=["thunderbird"]),
         ],
-    }, {"name": '',
-        "switch-key": '9',
-        "matches": [],
-    }, {"name": '',
-        "switch-key": '0',
-        "matches": [Match(wm_class=["clementine"])],
     }
 ]
 
@@ -68,7 +68,7 @@ extra_group = 0
 def addGroup(qtile):
     global extra_group
     if extra_group <= 9:
-        qtile.cmd_addgroup(str(extra_group))
+        qtile.cmd_addgroup(f"extra-{extra_group}")
         extra_group += 1
 
 @lazy.function
@@ -76,7 +76,7 @@ def delGroup(qtile):
     global extra_group
     if extra_group > 0:
         extra_group -= 1
-        qtile.cmd_delgroup(str(extra_group))
+        qtile.cmd_delgroup(f"extra-{extra_group}")
 
 keys.extend([
     Key([mod, "shift"], "equal", addGroup, desc="New Group"),

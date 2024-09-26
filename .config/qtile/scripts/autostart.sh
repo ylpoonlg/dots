@@ -33,4 +33,8 @@ powerkit &
 # Lock Screen
 light-locker --lock-on-suspend --lock-on-lid &
 xset s 0 0
+xset dpms 0 0 0
 xset s off -dpms
+
+# Setup screens
+autorandr --change

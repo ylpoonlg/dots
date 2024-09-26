@@ -82,5 +82,7 @@ return {
             },
             on_attach = on_attach,
         }
+
+        vim.keymap.set("n", "<leader>f", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
     end,
 }

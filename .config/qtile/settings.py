@@ -17,7 +17,7 @@ rofi_launcher = os.path.expanduser('~/.config/rofi/scripts/launcher-1')
 # Scripts
 autostart     = os.path.join(config_path, 'scripts/autostart.sh')
 loadbar       = os.path.join(config_path, 'scripts/load-bar.sh')
-screen_change = os.path.join(config_path, 'scripts/screen-change.sh')
+change_wallpaper = os.path.join(config_path, 'scripts/wallpapers.sh')
 setup_screens = '/usr/local/bin/setup-screens.sh'
 
 volume_up     = os.path.join(config_path, 'scripts/volume.sh set +5%')

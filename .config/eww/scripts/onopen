@@ -1,15 +1,6 @@
 #!/bin/bash
+cd `dirname $0`
 
-restart_trayer() {
-  killall trayer
-  sleep 0.5
-  exec trayer --monitor 0 --edge top --align right --expand false --distance 4 --width 8 --height 40 --margin 480 --tint 0x0D1017 --transparent true --alpha 25 &
-}
+./tray
 
-restart_qtile() {
-  sleep 0.5
-  qtile cmd-obj -o cmd -f restart
-}
-
-restart_trayer
-restart_qtile
+qtile cmd-obj -o cmd -f restart
