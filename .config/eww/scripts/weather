@@ -1,8 +1,8 @@
 #!/bin/bash
 
 KEY="APIKEY"
-LAT=53.46049900532491
-LON=-2.2315294865422373
+LAT="LATITUDE"
+LON="LONGITUDE"
 
 weather=$(curl -sf "api.openweathermap.org/data/2.5/weather?lat=$LAT&lon=$LON&appid=$KEY&units=metric")
 
