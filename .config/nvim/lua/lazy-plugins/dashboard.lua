@@ -46,7 +46,7 @@ return {
                         icon = "  ",
                         desc = "Notes ",
                         shortcut = "",
-                        action = open_file_path(home.."/Documents/",  "my_notes.txt"),
+                        action = open_file_path("/media/LG/Notes",  "my_notes.txt"),
                     },
                     {
                         icon = "  ",

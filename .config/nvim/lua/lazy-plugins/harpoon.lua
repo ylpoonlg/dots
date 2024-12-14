@@ -26,7 +26,7 @@ return {
         local map = vim.keymap.set
         local opts = { noremap = true, silent = true }
         map("n", "<leader>hl", function() toggle_telescope(harpoon:list()) end, opts)
-        map("n", "<leader>ha", function() harpoon:list():append() end, opts)
+        map("n", "<leader>ha", function() harpoon:list():add() end, opts)
         map("n", "<leader>hr", function() harpoon:list():remove() end, opts)
         map("n", "<leader>hj", function() harpoon:list():next() end, opts)
         map("n", "<leader>hk", function() harpoon:list():prev() end, opts)

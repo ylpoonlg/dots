@@ -27,17 +27,20 @@ map("x", "<leader>d", "\"_d", opts)
 map("x", "<leader>p", "\"_dP", opts) -- Discard overwritten text for paste
 
 -- Buffers
-map("n", "<C-w>", ":bdelete<CR>", opts)
-map("n", "<A-Tab>", ":bnext<CR>", opts)
-map("n", "<A-S-Tab>", ":bprevious<CR>", opts)
+map("n", "<leader>bd", ":bdelete<CR>", opts)
+map("n", "<leader>bn", ":bnext<CR>", opts)
+map("n", "<leader>bp", ":bprevious<CR>", opts)
+map("n", "<leader>ww", ":w<CR>", opts)
+map("n", "<leader>wq", ":wq<CR>", opts)
+map("n", "<leader>qq", ":q<CR>", opts)
 
 -- Tabs
-map("n", "<leader><C-t>", ":tabnew<CR>", opts)
-map("n", "<leader><Tab>", ":tabnext<CR>", opts)
-map("n", "<leader><S-Tab>", ":tabprevious<CR>", opts)
+map("n", "<leader><C-t>c", ":tabnew<CR>", opts)
+map("n", "<leader><C-t>n", ":tabnext<CR>", opts)
+map("n", "<leader><C-t>p", ":tabprevious<CR>", opts)
 
 -- Misc.
-map("n", "<C-a>", ":%y+<CR>", opts) -- Copy whole file
+map("n", "<C-a>", "ggVG", opts)
 map("n", "z]", "v}kzf", opts)
 map("n", "z[", "{jv}kzf", opts)
 
