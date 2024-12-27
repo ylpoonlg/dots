@@ -4,7 +4,7 @@ import os
 config_path = os.path.expanduser('~/.config/qtile/')
 
 # Applications
-terminal    = 'kitty --single-instance' # guess_terminal()
+terminal    = 'ghostty' # guess_terminal()
 browser     = 'firefox'
 emailclient = 'thunderbird'
 filemanager = 'pcmanfm-qt'

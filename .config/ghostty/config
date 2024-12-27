@@ -1,0 +1,24 @@
+# Styles
+theme = ayu-lg
+background-opacity = 0.90
+background-blur-radius = 20
+cursor-style = block
+
+# Keybinds
+keybind = ctrl+shift+plus=increase_font_size:1
+keybind = ctrl+shift+grave_accent=increase_font_size:1
+keybind = ctrl+shift+minus=decrease_font_size:1
+keybind = ctrl+shift+d=toggle_window_decorations
+
+# Window
+window-theme = ghostty
+window-decoration = false
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = true
+
+# Linux specific
+gtk-titlebar = false
+
+# macOS specific
+macos-titlebar-style = hidden

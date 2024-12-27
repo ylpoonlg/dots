@@ -21,6 +21,7 @@ continuation_prompt = '[❯❯ ](white)'
 # Module configs
 [directory]
 format = '[$path]($style)[$read_only]($read_only_style) '
+style = 'bold blue'
 truncation_symbol = '…/'
 
 [username]
