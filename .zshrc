@@ -53,31 +53,37 @@ WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider
 # Key bindings
 ################################################################################
 bindkey -v                                                      # vi bindings
+
+# History
+bindkey '^[[5~' history-beginning-search-backward               # Page up key
+bindkey '^[[6~' history-beginning-search-forward                # Page down key
+bindkey '^P' history-beginning-search-backward                  #
+bindkey '^N' history-beginning-search-forward                   #
+
+# Navigation
 bindkey '^[[7~' beginning-of-line                               # Home key
 bindkey '^[[H' beginning-of-line                                # Home key
+bindkey '^A' beginning-of-line                                  #
 if [[ "${terminfo[khome]}" != "" ]]; then
   bindkey "${terminfo[khome]}" beginning-of-line                # [Home] - Go to beginning of line
 fi
 bindkey '^[[8~' end-of-line                                     # End key
 bindkey '^[[F' end-of-line                                      # End key
+bindkey '^E' end-of-line                                        #
 if [[ "${terminfo[kend]}" != "" ]]; then
   bindkey "${terminfo[kend]}" end-of-line                       # [End] - Go to end of line
 fi
-bindkey '^[[2~' overwrite-mode                                  # Insert key
-bindkey '^[[3~' delete-char                                     # Delete key
 bindkey '^[[C'  forward-char                                    # Right key
 bindkey '^[[D'  backward-char                                   # Left key
-bindkey '^[[5~' history-beginning-search-backward               # Page up key
-bindkey '^P' history-beginning-search-backward                  # Page up key
-bindkey '^[[6~' history-beginning-search-forward                # Page down key
-bindkey '^N' history-beginning-search-forward                   # Page down key
-
-# Navigate words with ctrl+arrow keys
 bindkey '^[Oc' forward-word                                     #
 bindkey '^[Od' backward-word                                    #
-bindkey '^[[1;5D' backward-word                                 #
 bindkey '^[[1;5C' forward-word                                  #
+bindkey '^[[1;5D' backward-word                                 #
+
+# Edit
 bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
+bindkey '^[[2~' overwrite-mode                                  # Insert key
+bindkey '^[[3~' delete-char                                     # Delete key
 bindkey '^[[Z' undo                                             # Shift+tab undo last action
 
 ################################################################################
@@ -125,6 +131,10 @@ eval $(thefuck --alias)
 
 # Custom Prompt
 eval "$(starship init zsh)"
+function set_cursor_style() {
+    echo -ne '\e[1 q'
+}
+precmd_functions+=(set_cursor_style)
 
 # Fetch
 fm6000 -f ~/.greetart -c bright_cyan -g 16 -m 2 -o "Arch Linux"

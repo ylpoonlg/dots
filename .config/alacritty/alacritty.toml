@@ -1,0 +1,152 @@
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "PasteSelection"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ClearLogNotice"
+key = "L"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\f"
+key = "L"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mode = "~Alt"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mode = "~Alt"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mode = "~Alt"
+mods = "Shift"
+
+[terminal]
+
+[colors.bright]
+black = "0x242936"
+blue = "0x73d0ff"
+cyan = "0xc7fffd"
+green = "0xd5ff80"
+magenta = "0xffa3aa"
+red = "0xff6565"
+white = "0xffffff"
+yellow = "0xffad66"
+
+[colors.normal]
+black = "0x0d1017"
+blue = "0x59c2ff"
+cyan = "0x95e6cb"
+green = "0xaad94c"
+magenta = "0xf07178"
+red = "0xff3333"
+white = "0xbfbdb6"
+yellow = "0xff8f40"
+
+[colors.primary]
+background = "0x0d1017"
+foreground = "0xbfbdb6"
+
+[colors.selection]
+text = "0x0d1017"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "Jetbrains Mono"
+style = "Regular"
+
+[font.bold]
+style = "Bold"
+
+[font.bold_italic]
+style = "Bold Italic"
+
+[font.italic]
+style = "Italic"
+
+[scrolling]
+history = 5000
+
+[terminal.shell]
+program = "/usr/bin/zsh"
+
+[window]
+dynamic_padding = false
+opacity = 0.9
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 4
+y = 4
+
+[keyboard]
