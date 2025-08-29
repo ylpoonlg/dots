@@ -178,11 +178,13 @@
   :geometry (geometry
   :x "0%"
   :y "4px"
-  :width "1908px"
+  :width "2548px"
   :height "40px"
   :anchor "top center")
   :stacking "fg"
   :reserve (struts :distance "48px" :side "top")
+  :layer "bottom"
+  :stacking "bg" :wm-ignore "false"
   :windowtype "dock"
   :wm-ignore false
   (topbar))

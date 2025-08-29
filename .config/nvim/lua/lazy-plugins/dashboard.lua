@@ -37,7 +37,7 @@ return {
                         shortcut = "",
                     },
                     {
-                        icon = "  ",
+                        icon = "  ",
                         desc = "New File      ",
                         action = "enew",
                         shortcut = "",
@@ -46,7 +46,7 @@ return {
                         icon = "  ",
                         desc = "Notes ",
                         shortcut = "",
-                        action = open_file_path("/media/LG/Notes",  "my_notes.txt"),
+                        action = open_file_path(home.."/Documents/Notes",  "my_notes.md"),
                     },
                     {
                         icon = "  ",
@@ -55,16 +55,10 @@ return {
                         action = open_file_path(home.."/.config/nvim/",  "init.lua"),
                     },
                     {
-                        icon = "  ",
-                        desc = "Qtile Config  ",
+                        icon = "  ",
+                        desc = "Niri Config  ",
                         shortcut = "",
-                        action = open_file_path(home.."/.config/qtile/", "config.py"),
-                    },
-                    {
-                        icon = "  ",
-                        desc = "Eww Config    ",
-                        shortcut = "",
-                        action = open_file_path(home.."/.config/eww/",   "eww.yuck"),
+                        action = open_file_path(home.."/.config/niri/", "config.kdl"),
                     },
                     {
                         icon = "  ",

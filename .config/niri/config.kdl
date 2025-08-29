@@ -1,0 +1,334 @@
+// Edited by ylpoonlg
+
+
+//
+// ==================== Input Devices ====================
+//
+input {
+    keyboard {
+        xkb {
+            layout "ylpoonlg/us,us"
+            variant "dvorak-lg,basic"
+            options "caps:escape"
+        }
+
+        numlock                     // Enable numlock on startup
+    }
+
+    touchpad {
+        // off
+        tap
+        natural-scroll
+    }
+
+    mouse {
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "no-scroll"
+    }
+
+    // warp-mouse-to-focus
+    focus-follows-mouse max-scroll-amount="5%"
+}
+
+
+//
+// ==================== Monitors ====================
+//
+
+output "DP-1" {
+    mode "2560x1440@60.000"
+    position x=0 y=0
+    focus-at-startup
+}
+
+output "HDMI-A-1" {
+    mode "2560x1440@60.000"
+    position x=2560 y=0
+    focus-at-startup
+}
+
+
+//
+// ==================== Layout ====================
+//
+layout {
+    gaps 8
+
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    // preset-window-heights { }
+
+    // default-column-width { proportion 1.0; }
+
+    focus-ring {
+        off     // Turned off when using border
+        width 2
+        active-color "#ff8f40"
+        inactive-color "#1f222a"
+    }
+
+    border {
+        // off
+        width 2
+        active-color "#ff8f40"
+        inactive-color "#1f222a"
+        urgent-color "#f07178"
+    }
+
+    struts {
+        // top 30
+    }
+}
+
+
+//
+// ==================== Workspaces ====================
+//
+workspace "web" {
+    open-on-output "DP-1"
+}
+
+workspace "dev" {
+    open-on-output "DP-1"
+}
+
+workspace "sys" {
+    open-on-output "HDMI-A-1"
+}
+
+workspace "file" {
+    open-on-output "HDMI-A-1"
+}
+
+workspace "comm" {
+    open-on-output "HDMI-A-1"
+}
+
+
+//
+// ==================== Window Rules ====================
+//
+
+// Global rules
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id=r#"firefox$"# title=r#"^Picture-in-Picture$"#
+    match app-id=r#"firefox$"# title=r#"^Extension:"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^nemo$"#
+    open-on-workspace "file"
+}
+
+window-rule {
+    match app-id=r#"^thunderbird$"#
+    match app-id=r#"^Signal$"#
+    open-on-workspace "comm"
+}
+
+
+//
+// ==================== General ====================
+//
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot_%Y%m%d%H%M%S.png"
+
+animations {
+    // off
+}
+
+cursor {
+    xcursor-size 32
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+overview {
+    zoom 0.4
+    backdrop-color "#050509"
+}
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+
+//
+// ==================== Start ====================
+//
+
+environment {
+    DISPLAY ":0"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    GTK_THEME "Material-Black-Blueberry-LG"
+}
+
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "waypaper" "--restore"                         // Restore wallpaper
+spawn-at-startup "bash" "-c" "ags run"                          // Start bar
+spawn-at-startup "fcitx5"                                       // Input method
+
+
+//
+// ==================== Key Binds ====================
+//
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    //-------------------- Window Control --------------------//
+    Mod+W { close-window; }
+
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-down; }
+    Mod+K     { focus-window-up; }
+    Mod+L     { focus-column-right; }
+
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Down  { move-window-down; }
+    Mod+Shift+Up    { move-window-up; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+J     { move-window-down; }
+    Mod+Shift+K     { move-window-up; }
+    Mod+Shift+L     { move-column-right; }
+
+    Mod+Comma  { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
+
+    Mod+Ctrl+Left  { focus-monitor-left; }
+    Mod+Ctrl+Down  { focus-monitor-down; }
+    Mod+Ctrl+Up    { focus-monitor-up; }
+    Mod+Ctrl+Right { focus-monitor-right; }
+    Mod+Shift+S    { focus-monitor-previous; }
+    Mod+S          { focus-monitor-next; }
+
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
+    //-------------------- Workspace Control --------------------//
+    Mod+O { toggle-overview; }
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+D           { focus-workspace-down; }
+    Mod+U           { focus-workspace-up; }
+    Mod+Shift+D     { move-column-to-workspace-down; }
+    Mod+Shift+U     { move-column-to-workspace-up; }
+    Mod+Ctrl+D      { move-workspace-down; }
+    Mod+Ctrl+U      { move-workspace-up; }
+    Mod+F1          { move-workspace-to-monitor-previous; }
+    Mod+F2          { move-workspace-to-monitor-next; }
+
+    Mod+Tab { focus-workspace-previous; }
+
+    // Mouse Wheel
+    Mod+WheelScrollDown      cooldown-ms=200    { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=200    { focus-workspace-up; }
+    Mod+WheelScrollRight                        { focus-column-right; }
+    Mod+WheelScrollLeft                         { focus-column-left; }
+    Mod+Shift+WheelScrollDown                   { focus-column-right; }
+    Mod+Shift+WheelScrollUp                     { focus-column-left; }
+
+    //-------------------- Layout Control --------------------//
+
+    Mod+Ctrl+F { toggle-window-floating; }
+    Mod+Shift+F { switch-focus-between-floating-and-tiling; }
+
+    Mod+T { toggle-column-tabbed-display; }
+    Mod+C { center-column; }
+    Mod+Ctrl+C { center-visible-columns; }
+
+    // Window Size
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+M { expand-column-to-available-width; }
+    Mod+Ctrl+M { maximize-column; }
+    Mod+F11 { fullscreen-window; }
+
+    // Fine window size adjustments
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+At       { set-column-width "+10%";  }              // For dvorak-lg
+    Mod+Shift+At { set-window-height "+10%"; }
+
+
+    //-------------------- Special Keys --------------------//
+    // Screenshot
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    // Handle volume keys
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    // Actions to switch keyboard layouts. Do not use if set by xkb section
+    Alt+Space       { switch-layout "next"; }
+
+
+    //-------------------- Applications --------------------//
+    Mod+Return hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
+    Mod+B hotkey-overlay-title="Open Browser: Firefox" { spawn "firefox"; }
+    Mod+P hotkey-overlay-title="Open Launcher: Rofi" { spawn "~/.config/rofi/scripts/launcher-1"; }
+    Mod+F hotkey-overlay-title="Open File Manager: Nemo" { spawn "nemo"; }
+    Mod+Ctrl+R hotkey-overlay-title="Reload Bar" { spawn "bash" "-c" "ags quit && ags run"; }
+
+
+    //-------------------- Power --------------------//
+    Mod+Ctrl+L hotkey-overlay-title="Open Power Menu" { spawn "~/.config/rofi/scripts/power-menu"; }
+    Mod+Shift+P { power-off-monitors; }
+
+    Mod+Ctrl+Q      { quit; }
+    Ctrl+Alt+Delete { quit; }
+}

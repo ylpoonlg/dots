@@ -54,7 +54,7 @@
     (literal :content bluetooth_list)
     (box :orientation "h" :space-evenly false :halign "end" :spacing 16
       (button :class "popup_action_btn" :tooltip "Open Bluetooth Settings"
-              :onclick "scripts/pop bluetooth && (exec blueman-manager &)"
+              :onclick "scripts/pop bluetooth && (exec blueberry &)"
         "")
       )
     )

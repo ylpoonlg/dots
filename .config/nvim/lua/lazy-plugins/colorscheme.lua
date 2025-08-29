@@ -18,6 +18,8 @@ return {
             vim.api.nvim_set_hl(0, "ColorColumn", { bg="NONE" })
             vim.api.nvim_set_hl(0, "VertSplit", { fg="#000000", bg="NONE" })
             vim.api.nvim_set_hl(0, "SignColumn", { bg="NONE" })
+
+            vim.api.nvim_set_hl(0, "LineNr", { link="Comment" })
         end,
     },
     {

@@ -1,7 +1,9 @@
 /**
  *
- * Author : Aditya Shakya (adi1090x)
+ * Original Author : Aditya Shakya (adi1090x)
  * Github : @adi1090x
+ *
+ * Edited by @ylpoonlg
  * 
  * Configuration For Rofi Version: 1.7.3
  **/
@@ -9,16 +11,10 @@
 configuration {
 	/*---------- General setting ----------*/
 	modi: "drun,run,filebrowser,window";
-	case-sensitive: false;
-	cycle: true;
 	filter: "";
 	scroll-method: 0;
 	normalize-match: true;
 	show-icons: true;
-	icon-theme: "Papirus";
-	application-fallback-icon: "Adwaita";
-/*	cache-dir: ;*/
-	steal-focus: false;
 
 	/*---------- Matching setting ----------*/
 	matching: "normal";
@@ -178,7 +174,7 @@ configuration {
 @import                          "./colors/ayu.rasi"
 
 * {
-    font: "JetBrains Mono 10";
+    font: "JetBrainsMono Nerd Font 10";
 
     border-colour:               var(border);
     handle-colour:               var(selected);
@@ -212,17 +208,6 @@ configuration {
     element-padding:             15px;
     element-radius:              8px;
     element-spacing:             15px;
-
-    /* For Screens with 1366x768 resolution */
-    /*
-    screen-margin:               120px 225px;
-    box-spacing:                 20px;
-    list-padding:                4px;
-    element-padding:             10px;
-    element-radius:              6px;
-    element-spacing:             10px;
-    */
-    /* Use this as reference and create for your screen resolution */
 }
 
 /*****----- Main Window -----*****/

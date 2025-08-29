@@ -1,20 +1,15 @@
 /**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
+ * Edited by ylpoonlg
  **/
 
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun,run,window";
-    show-icons:                 false;
-    display-drun:               " Apps";
-    display-run:                " Run";
-    display-filebrowser:        " Files";
-    display-window:             " Windows";
+    show-icons:                 true;
+    display-drun:               "   Apps";
+    display-run:                "    Run";
+    display-filebrowser:        "  Files";
+    display-window:             "  Windows";
 	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
 	window-format:              "{w} · {c} · {t}";
 }
@@ -23,7 +18,7 @@ configuration {
 @import                          "../colors/ayu.rasi"
 
 * {
-    font: "JetBrains Mono 10";
+    font: "JetBrainsMono Nerd Font 10";
 
     border-colour:               var(border);
     handle-colour:               var(selected);
@@ -50,7 +45,7 @@ configuration {
     alternate-active-foreground: var(background);
 
     /* For Screens with 1920x1080 resolution */
-    screen-margin:               275px 400px;
+    screen-margin:               350px 800px;
     box-margin:                  16px;
     box-spacing:                 8px;
     list-padding:                8px;

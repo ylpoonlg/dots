@@ -1,0 +1,37 @@
+ignore-empty-password
+indicator-idle-visible
+hide-keyboard-layout
+
+indicator-radius=192
+indicator-thickness=16
+
+clock
+timestr=%R
+datestr=%a %d/%m
+
+font=JetBrains Mono Nerd Font
+
+color=0d1017
+image=~/Pictures/wallpapers/blue_ocean.jpg
+
+inside-color=242936
+inside-clear-color=0d1017
+inside-ver-color=242936
+inside-wrong-color=242936
+
+text-color=59c2ff
+text-clear-color=b5bd68
+text-caps-lock-color=aad94c
+text-ver-color=59c2ff
+text-wrong-color=ff3333
+
+ring-color=59c2ff50
+ring-ver-color=59c2ff50
+ring-clear-color=bfbdb650
+ring-wrong-color=ff656550
+
+key-hl-color=ff8f40
+bs-hl-color=ff6565
+separator-color=bfbdb6
+line-color=0d1017
+line-uses-ring

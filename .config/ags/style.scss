@@ -1,0 +1,236 @@
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+/* $fg-color: #{"@theme_fg_color"}; */
+/* $bg-color: #{"@theme_bg_color"}; */
+
+
+/*********** Colors ***********/
+$fg-color: #bfbdb6;
+$bg-color: #0d1017;
+$primary-color: #59c2ff;
+$secondary-color: #ff8f40;
+$grey-color: #626A73;
+
+:root {
+  font-weight: bold;
+  font-family: "JetBrainsMono Nerd Font";
+  color: $fg-color;
+}
+
+.primary {
+  color: $primary-color;
+}
+
+.secondary {
+  color: $secondary-color;
+}
+
+.fg {
+  color: $fg-color;
+}
+
+button {
+  border-radius: 8px;
+  padding: 4px;
+  background: transparent;
+  box-shadow: none;
+}
+
+box {
+  border-radius: 4px;
+}
+
+window.Bar {
+  background: transparent;
+  font-size: 16px;
+
+  > centerbox {
+    background: $bg-color;
+    border-radius: 8px;
+    margin: 8px;
+    margin-bottom: 0;
+  }
+
+  .powermenu-btn {
+    font-size: 24px;
+    padding: 0;
+    margin-left: 16px;
+  }
+
+  .controls-btn {
+    margin: 0 8px;
+    .controls-label {
+      padding: 0 8px;
+    }
+    &:hover {
+      background: rgba(200, 200, 200, 0.02);
+    }
+  }
+
+  .systray-box {
+    .systray-item-btn {
+      padding: 0 8px;
+      image {
+      }
+    }
+  }
+
+  .ws-box {
+    .ws-btn {
+      padding: 0px 10px;
+      border-radius: 100%;
+
+      label {
+        font-size: 20px;
+        color: $grey-color;
+
+        &.ws-active {
+          color: $secondary-color;
+        }
+        &.ws-win {
+          color: $primary-color;
+        }
+      }
+      &:hover {
+        background-color: rgba(100, 100, 100, 0.1);
+      }
+    }
+  }
+
+  .ws-name {
+    label {
+      font-size: 12px;
+      color: $grey-color;
+      margin-right: 4px;
+    }
+  }
+
+  .sysmon-box {
+    levelbar {
+      margin: 2px 8px;
+      * {
+        border-radius: 2px;
+      }
+      trough {
+        background-color: rgba(0,0,0,0.2);
+        block.filled {
+          background-color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .datetime-btn {
+    padding: 0 4px;
+
+    .date-label {
+      color: $secondary-color;
+      font-size: 16px;
+    }
+
+    .time-label {
+      color: $primary-color;
+      font-size: 20px;
+    }
+  }
+}
+
+window.Popup {
+  background: $bg-color;
+  border-radius: 8px;
+  margin: 8px;
+  padding: 16px;
+  border: solid 2px $primary-color;
+
+  .title-label {
+    color: $secondary-color;
+  }
+}
+
+window.Controls {
+  padding: 16px 24px;
+  box-shadow: 2px 0px 8px 4px #0a0a0a;
+
+  .volume-box {
+    scale {
+      mark > indicator {
+        background: $secondary-color;
+      }
+      trough {
+        background-color: rgba(0,0,0,0.5);
+        highlight {
+          background-image: image($secondary-color);
+        }
+        slider {
+          border-color: red;
+          outline-color: green;
+          background-color: transparent;
+          color: $secondary-color;
+          &:hover {
+            background-color: rgba($secondary-color, 0.1);
+          }
+        }
+      }
+    }
+
+    .title-1 {
+      color: $secondary-color;
+      font-size: 16px;
+    }
+
+    .volume-label {
+      color: $secondary-color;
+      font-size: 12px;
+    }
+  }
+
+  .conn-box {
+    margin-top: 8px;
+
+    .conn-tab-btn {
+      padding: 4px 16px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: $fg-color;
+      min-width: 64px;
+      &.active {
+        background-color: $primary-color;
+        color: $bg-color;
+      }
+    }
+  }
+
+  .network-box {
+    margin: 8px 0;
+    padding: 4px;
+    background-color: rgba(100, 100, 100, 0.1);
+    min-height: 128px;
+    border-radius: 12px;
+    
+    .network-item {
+      padding: 4px 8px;
+      border-radius: 8px;
+      &:hover {
+        background-color: rgba(100, 100, 100, 0.1);
+      }
+    }
+  }
+}
+
+
+window.VolumePopup {
+  margin-top: 96px;
+  
+  levelbar {
+    margin-top: 16px;
+    * {
+      border-radius: 8px;
+    }
+    trough {
+      border-radius: 8px;
+      min-height: 8px;
+      background-color: rgba(0,0,0,0.2);
+      block.filled {
+        background-color: $secondary-color;
+      }
+    }
+  }
+}

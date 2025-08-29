@@ -37,7 +37,6 @@ call plug#begin(expand('~/.vim/plugged'))
 
 " Colorschemes
 Plug 'Luxed/ayu-vim'
-Plug 'crusoexia/vim-monokai'
 
 Plug 'itchyny/lightline.vim'
 

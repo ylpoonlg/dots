@@ -1,6 +1,6 @@
 # Styles
 theme = ayu-lg
-background-opacity = 0.90
+background-opacity = 0.95
 background-blur-radius = 20
 cursor-style = block
 

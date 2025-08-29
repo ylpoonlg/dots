@@ -1,10 +1,5 @@
 /**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
+ * Edited by ylpoonlg
  **/
 
 /*****----- Configuration -----*****/
@@ -17,6 +12,13 @@ configuration {
 
 /*****----- Global Properties -----*****/
 @import                          "../colors/ayu.rasi"
+
+* {
+    font: "JetBrainsMono Nerd Font 12";
+
+    element-padding:             8px;
+    listview-lines:              6;
+}
 
 /*****----- Main Window -----*****/
 window {
@@ -48,49 +50,23 @@ mainbox {
     border-radius:               0px 0px 0px 0px;
     border-color:                @selected;
     background-color:            transparent;
-    children:                    [ "inputbar", "listview" ];
+    children:                    [ "listview" ];
 }
 
 /*****----- Inputbar -----*****/
 inputbar {
-    enabled:                     true;
-    spacing:                     8px;
-    margin:                      0px;
-    padding:                     16px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @border;
-    background-color:            @border;
-    text-color:                  @background;
-    children:                    [ "prompt", "entry" ];
+    enabled:                     false;
 }
 
-prompt {
-    enabled:                     true;
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-textbox-prompt-colon {
-    enabled:                     true;
-    expand:                      false;
-    str:                         "::";
-    background-color:            inherit;
-    text-color:                  inherit;
-}
 entry {
-    enabled:                     true;
-    background-color:            inherit;
-    text-color:                  inherit;
-    cursor:                      text;
-    placeholder:                 "Search...";
-    placeholder-color:           inherit;
+    enabled:                     false;
 }
 
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       6;
+    lines:                       @listview-lines;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
@@ -116,9 +92,9 @@ scrollbar {
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     @element-spacing;
     margin:                      0px;
-    padding:                     8px;
+    padding:                     @element-padding;
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @selected;
@@ -126,20 +102,27 @@ element {
     text-color:                  @foreground;
     cursor:                      pointer;
 }
-element normal.normal {
-    background-color:            @background;
+
+element normal {
     text-color:                  @foreground;
 }
-element selected.normal {
+
+element alternate {
+    text-color:                  @foreground-alt;
+}
+
+element selected {
     background-color:            @background-alt;
-    text-color:                  @foreground;
+    text-color:                  @selected;
 }
+
 element-icon {
     background-color:            transparent;
     text-color:                  inherit;
     size:                        32px;
     cursor:                      inherit;
 }
+
 element-text {
     background-color:            transparent;
     text-color:                  inherit;
@@ -147,21 +130,4 @@ element-text {
     cursor:                      inherit;
     vertical-align:              0.5;
     horizontal-align:            0.0;
-}
-
-/*****----- Message -----*****/
-error-message {
-    padding:                     15px;
-    border:                      2px solid;
-    border-radius:               12px;
-    border-color:                @selected;
-    background-color:            @background;
-    text-color:                  @foreground;
-}
-textbox {
-    background-color:            @background;
-    text-color:                  @foreground;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
-    highlight:                   none;
 }
