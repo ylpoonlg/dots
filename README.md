@@ -1,4 +1,6 @@
-# My Dot Files
+# My Dot Files (v1)
+
+This version was used for my old laptop. Not maintained anymore, just putting here as an archive.
 
 > **NOTE**
 >
@@ -19,7 +21,7 @@
 - Font: JetBrains Mono (Nerd patched)
 
 ## Screenshots
-![screenshot_0](https://github.com/ylpoonlg/dots/blob/main/img/screenshot_0.png?raw=true)
-![screenshot_1](https://github.com/ylpoonlg/dots/blob/main/img/screenshot_1.png?raw=true)
-![screenshot_2](https://github.com/ylpoonlg/dots/blob/main/img/screenshot_2.png?raw=true)
-![screenshot_3](https://github.com/ylpoonlg/dots/blob/main/img/screenshot_3.png?raw=true)
+![screenshot_0](https://github.com/ylpoonlg/dots/blob/v1/img/screenshot_0.png?raw=true)
+![screenshot_1](https://github.com/ylpoonlg/dots/blob/v1/img/screenshot_1.png?raw=true)
+![screenshot_2](https://github.com/ylpoonlg/dots/blob/v1/img/screenshot_2.png?raw=true)
+![screenshot_3](https://github.com/ylpoonlg/dots/blob/v1/img/screenshot_3.png?raw=true)
