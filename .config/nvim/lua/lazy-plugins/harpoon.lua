@@ -4,28 +4,31 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function ()
         local harpoon = require("harpoon")
+        local fzflua = require("fzf-lua")
+
         harpoon:setup({})
 
-        local conf = require("telescope.config").values
-        local function toggle_telescope(harpoon_files)
+        local function harpoon_fzf_picker(harpoon_files)
             local file_paths = {}
             for _, item in ipairs(harpoon_files.items) do
                 table.insert(file_paths, item.value)
             end
 
-            require("telescope.pickers").new({}, {
-                prompt_title = "Harpoon",
-                finder = require("telescope.finders").new_table({
-                    results = file_paths,
-                }),
-                previewer = conf.file_previewer({}),
-                sorter = conf.generic_sorter({}),
-            }):find()
+            -- Call fzf-lua with the prepared list
+            fzflua.fzf_exec(file_paths, {
+                prompt = 'Harpoon ❯ ',
+                actions = {
+                    ["enter"]  = FzfLua.actions.file_edit_or_qf,
+                    ["ctrl-s"] = FzfLua.actions.file_split,
+                    ["ctrl-v"] = FzfLua.actions.file_vsplit,
+                    ["ctrl-t"] = FzfLua.actions.file_tabedit,
+                },
+            })
         end
 
         local map = vim.keymap.set
         local opts = { noremap = true, silent = true }
-        map("n", "<leader>hl", function() toggle_telescope(harpoon:list()) end, opts)
+        map("n", "<leader>hl", function() harpoon_fzf_picker(harpoon:list()) end, opts)
         map("n", "<leader>ha", function() harpoon:list():add() end, opts)
         map("n", "<leader>hr", function() harpoon:list():remove() end, opts)
         map("n", "<leader>hj", function() harpoon:list():next() end, opts)

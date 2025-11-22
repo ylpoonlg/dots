@@ -33,7 +33,7 @@ return {
                     {
                         icon = "  ",
                         desc = "Open A File   ",
-                        action = "Telescope find_files",
+                        action = "FzfLua files",
                         shortcut = "",
                     },
                     {

@@ -19,6 +19,7 @@ map("n", "<leader>rzj", ":resize +4<CR>", opts)
 map("n", "<leader>rzk", ":resize -4<CR>", opts)
 map("n", "<leader>rzl", ":vert resize +4<CR>", opts)
 map("n", "<leader>rzh", ":vert resize -4<CR>", opts)
+map("n", "==", "<C-w>=", opts)
 
 -- Editing
 map("n", "x", "\"_x", opts)
